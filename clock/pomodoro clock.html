@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pomodoro Clock</title>
+    <style>
+        body {
+            background:
+		linear-gradient(45deg, purple, yellow);
+            color: white;
+            font-family: Helvetica Neue, Arial, sans;
+            font-weight: 200;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 200;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 1.3em;
+        }
+
+        button:disabled {
+            color: rgba(128, 128, 128, 32);
+        }
+
+        .controls-block {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .controls-label {
+            font-size: 0.8em;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        .control-value {
+            font-size: 2em;
+        }
+
+        .controls-block > button {
+            background-color: transparent;
+            color: white;
+            font-size: 1.5em;
+            min-width: 32px;
+            vertical-align: bottom;
+        }
+
+        #clock-container {
+            margin-top: 30px;
+            border: 2px solid rgb(154, 202, 39);
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            display: table;
+            overflow: hidden;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #clock-content {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #clock-counter {
+            font-size: 5em;
+            text-align: center;
+            margin: auto;
+            -webkit-font-feature-settings: 'tnum';
+            -moz-font-feature-settings: 'tnum';
+            -ms-font-feature-settings: 'tnum';
+        }
+
+        #clock-container > button {
+            border: none;
+            background-color: transparent;
+            color: white;
+            font-size: 1em;
+            min-width: 95px;
+        }
+
+        #clock-label {
+            margin-top: -20px;
+            font-size: 2em;
+        }
+
+        #outer {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #ccc;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        #inner, #inner div {
+            z-index: -1;
+            width: 100%;
+            overflow: hidden;
+            left: -1px;
+            position: absolute;
+        }
+
+        #inner {
+            border-top-width: 0;
+            background-color: rgb(154, 202, 39);
+            bottom: 0;
+            height: 0%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>It's Pomodoro Time!</h1>
+
+    <div id="controls">
+        <div id="break-timer" class="controls-block">
+            <p><span class='controls-label'>Break Length</span></p>
+            <button id="break-minus">&#8722;</button>
+            <span id="break-indicator" class="control-value">5</span>
+            <button id="break-plus">&#43;</button>
+        </div>
+        <div id="session-timer" class="controls-block">
+            <p><span class='controls-label'>Session Length</span></p>
+            <button id="session-minus">&#8722;</button>
+            <span id="session-indicator" class="control-value">25</span>
+            <button id="session-plus">&#43;</button>
+        </div>
+    </div>
+
+    <div id="clock-container">
+        <div id="inner"></div>
+
+        <div id="clock-content">
+            <div id="clock-label">Session</div>
+            <div id="clock-counter">25</div>
+            <button id="clock-button">Start</button>
+            <button id="reset-button" disabled>Reset</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // Set default timer lengths (in seconds)
+        var breakTime = 300;
+        var sessionTime = 1500;
+
+        // Set the countdown timer for the first Session
+        var clockTime = sessionTime;
+        var clockType = 'session';
+
+        // Tell the app that the clock isn't running
+        var clockRunning = false;
+
+        // Set an ID to use with setInterval and clearInterval
+        var countdownID;
+
+        // Functions to convert seconds to friendly formats
+        var inMinSec = function (time) {
+            var m = Math.floor(time / 60);
+            var s = time % 60;
+
+            if (s < 10) {
+                s = '0' + s.toString();
+            }
+            return m + ':' + s;
+        };
+
+        var inMinOnly = function (time) {
+            return (time / 60).toFixed();
+        }
+
+        // Functions for pushing timer values to the UI in friendly formats
+        var updateBreakIndicator = function () {
+            $('#break-indicator').text(inMinOnly(breakTime));
+        }
+
+        var updateSessionIndicator = function () {
+            $('#session-indicator').text(inMinOnly(sessionTime));
+            if (clockType === 'session') {
+                $('#clock-counter').text(inMinSec(sessionTime));
+            }
+        }
+
+        var updateClockCounter = function () {
+            $('#clock-counter').text(inMinSec(clockTime));
+        }
+
+        // Update the progress bar. 'Progress' should be an int from 0-100.
+        var updateProgress = function (progress) {
+            progress = Math.abs(progress - 100).toFixed(2).toString() + '%';
+            $('#inner').height(progress);
+        };
+
+        // Initialize the UI
+        var resetApp = function () {
+            clockTime = sessionTime;
+            clockType = 'session';
+            updateBreakIndicator();
+            updateSessionIndicator();
+            updateClockCounter();
+            updateProgress(100);
+            $('#clock-label').text('Session');
+            $('#clock-button').text('Start');
+            $('#reset-button').attr('disabled', true);
+        }
+
+        resetApp();
+
+        // Click Handlers for changing the break and session lengths.
+        // If the clock is running, don't allow the times to be changed.
+        $('#break-minus').on('click', function () {
+            if (clockRunning) {
+                return;
+            }
+
+            // Don't allow negative time values
+            if (breakTime > 0 && clockType === 'break') {
+                breakTime -= 60;
+                clockTime = breakTime;
+                updateBreakIndicator();
+                updateClockCounter();
+            } else if (breakTime > 0) {
+                // Increment the time by one minute
+                breakTime -= 60;
+                updateBreakIndicator();
+            }
+        });
+
+        $('#break-plus').on('click', function () {
+                        if (clockRunning) {
+                return;
+            }
+
+            if (clockType === 'break') {
+                breakTime += 60;
+                clockTime = breakTime;
+                updateBreakIndicator();
+                updateClockCounter();
+            } else {
+                breakTime += 60;
+                updateBreakIndicator();
+            }
+        });
+
+        $('#session-minus').on('click', function () {
+            if (clockRunning) {
+                return;
+            }
+
+            if (sessionTime > 0) {
+                sessionTime -= 60;
+                resetApp();
+            }
+        });
+
+        $('#session-plus').on('click', function () {
+            if (clockRunning) {
+                return;
+            }
+            sessionTime += 60;
+            resetApp();
+        });
+
+
+        // Timer function. When the session time runs out, switch to break time,
+        // and vice-versa.
+        var countdown = function () {
+            if (clockTime > 0 && clockRunning) {
+                clockTime -= 1;
+                updateClockCounter();
+                if (clockType === 'session') {
+                    updateProgress(clockTime / sessionTime * 100);
+                } else {
+                    updateProgress(clockTime / breakTime * 100);
+                }
+            } else if (clockTime === 0 && clockRunning) {
+                if (clockType === 'session') {
+                    $('#clock-label').text('Break');
+                    clockType = 'break';
+                    clockTime = breakTime;
+                } else if (clockType === 'break') {
+                    $('#clock-label').text('Session');
+                    clockType = 'session';
+                    clockTime = sessionTime;
+                }
+            }
+        };
+
+        // Start-Stop Click Handler
+        $('#clock-button').on('click', function () {
+            if (clockRunning) {
+                clockRunning = false;
+                window.clearInterval(countdownID);
+                $('#clock-button').text('Resume');
+                $('#reset-button').attr('disabled', false);
+            } else {
+                clockRunning = true;
+                countdownID = window.setInterval(countdown, 1000);
+                $('#clock-button').text('Pause');
+                $('#reset-button').attr('disabled', true);
+            }
+        });
+
+        // Reset Click Handler
+        $('#reset-button').on('click', function () {
+            resetApp();
+        });
+
+    });
+</script>
+</body>
+</html>
