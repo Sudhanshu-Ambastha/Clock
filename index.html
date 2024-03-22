@@ -1,6 +1,6 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Clock</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,103 +9,113 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-       * {box-sizing: border-box}
+        * {box-sizing: border-box}
 
-/* Style the tab */
-.tab {
-  float: left;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 30%;
-  height: 300px;
-}
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 30%;
+            height: 300px;
+        }
 
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  display: block;
-  background-color: inherit;
-  color: black;
-  padding: 22px 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-}
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
 
-/* Create an active/current "tab button" class */
-.tab button.active {
-  background-color: #ccc;
-}
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #ccc;
+        }
 
-/* Style the tab content */
-.tabcontent {
-  float: left;
-  padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
-  height: 300px;
-}
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 70%;
+            border-left: none;
+            height: 300px;
+        }
+
+        /* Adjusting iframe size */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
-  </head>
-  <body>
-    <div id="Alarm" class="tabcontent">
-        <h1>Alarm</h1>
-        <link href="C:/Users/sudha/OneDrive/Documents/GitHub/Clock/clock/alarm.html">
-      </div>
-      
-      <div id="World Clock" class="tabcontent">
-        <h1>World Clock</h1>
-        <link href="C:/Users/sudha/OneDrive/Documents/GitHub/Clock/clock/world clock.html">
-      </div>
-    
-      <div id="Pomodoro Clock" class="tabcontent">
-        <link href="C:/Users/sudha/OneDrive/Documents/GitHub/Clock/clock/pomodoro.html">
-        </div>
+</head>
+<body>
+<div class="tab">
+    <button class="tablink" onclick="openCity(event, 'Alarm')" id="defaultOpen">Alarm</button>
+    <button class="tablink" onclick="openCity(event, 'WorldClock')">World Clock</button>
+    <button class="tablink" onclick="openCity(event, 'PomodoroClock')">Pomodoro Clock</button>
+    <button class="tablink" onclick="openCity(event, 'Stopwatch')">Stopwatch</button>
+    <button class="tablink" onclick="openCity(event, 'Timer')">Timer</button>
+</div>
 
-      <div id="Stopwatch" class="tabcontent">
-        <h1>Stopwatch</h1>
-        <link href="C:/Users/sudha/OneDrive/Documents/GitHub/Clock/clock/stopwatch.html">
-      </div>
-      
-      <div id="Timer" class="tabcontent">
-        <h1>Timer</h1>
-        <link href="C:/Users/sudha/OneDrive/Documents/GitHub/Clock/clock/timer.html">
-      </div>
-      
-      <button class="tablink" onclick="openCity('Alarm')" id="defaultOpen">Alarm</button>
-      <button class="tablink" onclick="openCity('World Clock')">World Clock</button>
-      <button class="tablink" onclick="openCity('Pomodoro Clock')">Pomodoro Clock</button>
-      <button class="tablink" onclick="openCity('Stopwatch')">Stopwatch</button>
-      <button class="tablink" onclick="openCity('Timer')">Timer</button>
+<div id="Alarm" class="tabcontent">
+    <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQoNCjxoZWFkPg0KCTxtZXRhIGNoYXJzZXQ9IlVURi04Ij4NCgk8bWV0YSBuYW1lPSJ2aWV3cG9ydCJjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsaW5pdGlhbC1zY2FsZT0xLjAiPg0KCTx0aXRsZT5BbGFybSBDbG9jazwvdGl0bGU+DQogPHN0eWxlPg0KICAgYm9keSB7DQoJZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOw0KCWJhY2tncm91bmQ6DQoJCWxpbmVhci1ncmFkaWVudCg0NWRlZywgIzAwN2JmZiwgI2Y1MDNmNSk7DQoJY29sb3I6ICNmZmY7DQoJZGlzcGxheTogZmxleDsNCglqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsNCglhbGlnbi1pdGVtczogY2VudGVyOw0KCW1pbi1oZWlnaHQ6IDEwMHZoOw0KCW1hcmdpbjogMDsNCn0NCg0KLmNsb2NrIHsNCgl0ZXh0LWFsaWduOiBjZW50ZXI7DQoJYmFja2dyb3VuZC1jb2xvcjogI2ZmZjsNCglib3JkZXItcmFkaXVzOiAxMHB4Ow0KCWJveC1zaGFkb3c6IDAgMCAxMHB4IHJnYmEoMCwgMCwgMCwgMC4yKTsNCglwYWRkaW5nOiAyMHB4Ow0KCXdpZHRoOiAzMDBweDsNCn0NCg0KaDEgew0KCWZvbnQtc2l6ZTogMnJlbTsNCgljb2xvcjogZ3JlZW47DQp9DQoNCmgzIHsNCglmb250LXNpemU6IDEuMHJlbTsNCgljb2xvcjogIzMzMzsNCn0NCg0KLnRpbWUgew0KCWZvbnQtc2l6ZTogMnJlbTsNCgltYXJnaW46IDIwcHggMDsNCgljb2xvcjogIzMzMzsNCn0NCg0KLmlucHV0LXJvdyB7DQoJZGlzcGxheTogZmxleDsNCglmbGV4LWRpcmVjdGlvbjogY29sdW1uOw0KCWdhcDogMTBweDsNCglhbGlnbi1pdGVtczogY2VudGVyOw0KfQ0KDQouaW5wdXQtZmllbGQgew0KCWRpc3BsYXk6IGZsZXg7DQoJZmxleC1kaXJlY3Rpb246IGNvbHVtbjsNCglhbGlnbi1pdGVtczogY2VudGVyOw0KfQ0KDQppbnB1dFt0eXBlPSJkYXRlIl0sDQppbnB1dFt0eXBlPSJ0aW1lIl0gew0KCXBhZGRpbmc6IDEwcHg7DQoJZm9udC1zaXplOiAxcmVtOw0KCWJvcmRlcjogMXB4IHNvbGlkICNjY2M7DQoJYm9yZGVyLXJhZGl1czogNXB4Ow0KCXdpZHRoOiAxMDAlOw0KCW1heC13aWR0aDogMjAwcHg7DQp9DQoNCi5idXR0b24tcm93IHsNCglkaXNwbGF5OiBmbGV4Ow0KCWdhcDogMTBweDsNCglqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsNCglhbGlnbi1pdGVtczogY2VudGVyOw0KfQ0KDQojc2V0QWxhcm0sDQojdXBkYXRlVGltZSB7DQoJYmFja2dyb3VuZC1jb2xvcjogIzAwN2JmZjsNCgljb2xvcjogI2ZmZjsNCglib3JkZXI6IG5vbmU7DQoJcGFkZGluZzogMTBweCAyMHB4Ow0KCWJvcmRlci1yYWRpdXM6IDVweDsNCgljdXJzb3I6IHBvaW50ZXI7DQoJZm9udC1zaXplOiAxcmVtOw0KCXRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4zczsNCn0NCg0KI3NldEFsYXJtOmhvdmVyLA0KI3VwZGF0ZVRpbWU6aG92ZXIgew0KCWJhY2tncm91bmQtY29sb3I6ICMwMDU2YjM7DQp9DQoNCi5hbGFybXMgew0KCW1hcmdpbi10b3A6IDIwcHg7DQoJdGV4dC1hbGlnbjogbGVmdDsNCgljb2xvcjogIzMzMzsNCn0NCg0KLmFsYXJtIHsNCgliYWNrZ3JvdW5kLWNvbG9yOiAjZjBmMGYwOw0KCWJvcmRlcjogMXB4IHNvbGlkICNjY2M7DQoJYm9yZGVyLXJhZGl1czogNXB4Ow0KCXBhZGRpbmc6IDEwcHg7DQoJbWFyZ2luOiAxMHB4IDA7DQoJZGlzcGxheTogZmxleDsNCglqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47DQoJYWxpZ24taXRlbXM6IGNlbnRlcjsNCglhbmltYXRpb246IGZhZGVJbiAwLjVzIGVhc2UtaW4tb3V0Ow0KCWZvbnQtc2l6ZTogMTRweDsNCn0NCg0KQGtleWZyYW1lcyBmYWRlSW4gew0KCWZyb20gew0KCQlvcGFjaXR5OiAwOw0KCX0NCg0KCXRvIHsNCgkJb3BhY2l0eTogMTsNCgl9DQp9DQoNCiA8L3N0eWxlPg0KPC9oZWFkPg0KDQo8Ym9keT4NCgk8ZGl2IGNsYXNzPSJjbG9jayI+DQoJCTxoMT4NCgkJQWxhcm0gQ2xvY2sNCgkJPC9oMT4NCgkJPGRpdiBjbGFzcz0idGltZSIgaWQ9InRpbWUiPg0KCQkJMDA6MDA6MDANCgkJPC9kaXY+DQoJCTxkaXYgY2xhc3M9ImlucHV0LXJvdyI+DQoJCQk8ZGl2IGNsYXNzPSJpbnB1dC1maWVsZCI+DQoJCQkJPGxhYmVsIGZvcj0iYWxhcm1EYXRlIj4NCgkJCQkJU2VsZWN0IERhdGU6DQoJCQkJPC9sYWJlbD4NCgkJCQk8aW5wdXQgdHlwZT0iZGF0ZSINCgkJCQkJaWQ9ImFsYXJtRGF0ZSINCgkJCQkJY2xhc3M9ImFsYXJtLWlucHV0Ig0KCQkJCQltaW49IiI+DQoJCQk8L2Rpdj4NCgkJCTxkaXYgY2xhc3M9ImlucHV0LWZpZWxkIj4NCgkJCQk8bGFiZWwgZm9yPSJhbGFybVRpbWUiPg0KCQkJCQlTZWxlY3QgVGltZToNCgkJCQk8L2xhYmVsPg0KCQkJCTxpbnB1dCB0eXBlPSJ0aW1lIiBpZD0iYWxhcm1UaW1lIg0KCQkJCQljbGFzcz0iYWxhcm0taW5wdXQiPg0KCQkJPC9kaXY+DQoJCQk8YnV0dG9uIGlkPSJzZXRBbGFybSI+DQoJCQkJU2V0IEFsYXJtDQoJCQk8L2J1dHRvbj4NCgkJPC9kaXY+DQoJCTxkaXYgY2xhc3M9ImFsYXJtcyIgaWQ9ImFsYXJtcyI+DQoJCTwvZGl2Pg0KCTwvZGl2Pg0KCTxzY3JpcHQ+DQoJICBsZXQgdGltZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJ0aW1lIik7DQpsZXQgZGF0ZUlucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoImFsYXJtRGF0ZSIpOw0KbGV0IHRJbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJhbGFybVRpbWUiKTsNCmxldCBidG4gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgic2V0QWxhcm0iKTsNCmxldCBjb250YW4gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiYWxhcm1zIik7DQpsZXQgaW50ZXJWYWw7DQpsZXQgbWF4VmFsdWUgPSAzOw0KbGV0IGNudCA9IDA7DQpsZXQgYWxtVGltZXNBcnJheSA9IFtdOw0KZnVuY3Rpb24gdGltZUNoYW5nZUZ1bmN0aW9uKCkgew0KCWxldCBjdXJyID0gbmV3IERhdGUoKTsNCglsZXQgaHJzID0gY3Vyci5nZXRIb3VycygpOw0KCWxldCBtaW4gPSBTdHJpbmcoY3Vyci5nZXRNaW51dGVzKCkpLnBhZFN0YXJ0KDIsICIwIik7DQoJbGV0IHNlYyA9IFN0cmluZyhjdXJyLmdldFNlY29uZHMoKSkucGFkU3RhcnQoMiwgIjAiKTsNCglsZXQgcGVyaW9kID0gIkFNIjsNCglpZiAoaHJzID49IDEyKSB7DQoJCXBlcmlvZCA9ICJQTSI7DQoJCWlmIChocnMgPiAxMikgew0KCQkJaHJzIC09IDEyOw0KCQl9DQoJfQ0KCWhycyA9IFN0cmluZyhocnMpLnBhZFN0YXJ0KDIsICIwIik7DQoJdGltZS50ZXh0Q29udGVudCA9IGAke2hyc306JHttaW59OiR7c2VjfSAke3BlcmlvZH1gOw0KfQ0KZnVuY3Rpb24gYWxhcm1TZXRGdW5jdGlvbigpIHsNCglsZXQgbm93ID0gbmV3IERhdGUoKTsNCglsZXQgc2VsZWN0ZWREYXRlID0gbmV3IERhdGUoZGF0ZUlucHV0LnZhbHVlICsgIlQiICsgdElucHV0LnZhbHVlKTsNCglpZiAoc2VsZWN0ZWREYXRlIDw9IG5vdykgew0KCQlhbGVydChgSW52YWxpZCB0aW1lLiBQbGVhc2Ugc2VsZWN0IA0KCWEgZnV0dXJlIGRhdGUgYW5kIHRpbWUuYCk7DQoJCXJldHVybjsNCgl9DQoJaWYgKGFsbVRpbWVzQXJyYXkuaW5jbHVkZXMoc2VsZWN0ZWREYXRlLnRvU3RyaW5nKCkpKSB7DQoJCWFsZXJ0KGBZb3UgY2Fubm90IHNldCBtdWx0aXBsZSANCglhbGFybXMgZm9yIHRoZSBzYW1lIHRpbWUuYCk7DQoJCXJldHVybjsNCgl9DQoJaWYgKGNudCA8IG1heFZhbHVlKSB7DQoJCWxldCB0aW1lVW50aWxBbGFybSA9IHNlbGVjdGVkRGF0ZSAtIG5vdzsNCgkJbGV0IGFsYXJtRGl2ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7DQoJCWFsYXJtRGl2LmNsYXNzTGlzdC5hZGQoImFsYXJtIik7DQoJCWFsYXJtRGl2LmlubmVySFRNTCA9IGANCgkJCTxzcGFuPg0KCQkJJHtzZWxlY3RlZERhdGUudG9Mb2NhbGVTdHJpbmcoKX0NCgkJCTwvc3Bhbj4NCgkJCTxidXR0b24gY2xhc3M9ImRlbGV0ZS1hbGFybSI+DQoJCQlEZWxldGUNCgkJCTwvYnV0dG9uPg0KCQlgOw0KCQlhbGFybURpdg0KCQkJLnF1ZXJ5U2VsZWN0b3IoIi5kZWxldGUtYWxhcm0iKQ0KCQkJLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwgKCkgPT4gew0KCQkJCWFsYXJtRGl2LnJlbW92ZSgpOw0KCQkJCWNudC0tOw0KCQkJCWNsZWFyVGltZW91dChpbnRlclZhbCk7DQoJCQkJY29uc3QgaWR4ID0gYWxtVGltZXNBcnJheS5pbmRleE9mKHNlbGVjdGVkRGF0ZS50b1N0cmluZygpKTsNCgkJCQlpZiAoaWR4ICE9PSAtMSkgew0KCQkJCQlhbG1UaW1lc0FycmF5LnNwbGljZShpZHgsIDEpOw0KCQkJCX0NCgkJCX0pOw0KCQlpbnRlclZhbCA9IHNldFRpbWVvdXQoKCkgPT4gew0KCQkJYWxlcnQoIlRpbWUgdG8gd2FrZSB1cCEiKTsNCgkJCWFsYXJtRGl2LnJlbW92ZSgpOw0KCQkJY250LS07DQoJCQljb25zdCBhbGFybUluZGV4ID0gYWxtVGltZXNBcnJheS5pbmRleE9mKHNlbGVjdGVkRGF0ZS50b1N0cmluZygpKTsNCgkJCWlmIChhbGFybUluZGV4ICE9PSAtMSkgew0KCQkJCWFsbVRpbWVzQXJyYXkuc3BsaWNlKGFsYXJtSW5kZXgsIDEpOw0KCQkJfQ0KCQl9LCB0aW1lVW50aWxBbGFybSk7DQoJCWNvbnRhbi5hcHBlbmRDaGlsZChhbGFybURpdik7DQoJCWNudCsrOw0KCQlhbG1UaW1lc0FycmF5LnB1c2goc2VsZWN0ZWREYXRlLnRvU3RyaW5nKCkpOw0KCX0gZWxzZSB7DQoJCWFsZXJ0KCJZb3UgY2FuIG9ubHkgc2V0IGEgbWF4aW11bSBvZiAzIGFsYXJtcy4iKTsNCgl9DQp9DQpmdW5jdGlvbiBzaG93QWxhcm1GdW5jdGlvbigpIHsNCglsZXQgYWxhcm1zID0gY29udGFuLnF1ZXJ5U2VsZWN0b3JBbGwoIi5hbGFybSIpOw0KCWFsYXJtcy5mb3JFYWNoKChhbGFybSkgPT4gew0KCQlsZXQgZGVsZXRlQnV0dG9uID0gYWxhcm0ucXVlcnlTZWxlY3RvcigiLmRlbGV0ZS1hbGFybSIpOw0KCQlkZWxldGVCdXR0b24uYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCAoKSA9PiB7DQoJCQlhbGFybURpdi5yZW1vdmUoKTsNCgkJCWNudC0tOw0KCQkJY2xlYXJUaW1lb3V0KGludGVyVmFsKTsNCgkJCWNvbnN0IGFsYXJtSW5kZXggPSBhbG1UaW1lc0FycmF5LmluZGV4T2Yoc2VsZWN0ZWREYXRlLnRvU3RyaW5nKCkpOw0KCQkJaWYgKGFsYXJtSW5kZXggIT09IC0xKSB7DQoJCQkJYWxtVGltZXNBcnJheS5zcGxpY2UoYWxhcm1JbmRleCwgMSk7DQoJCQl9DQoJCX0pOw0KCX0pOw0KfQ0Kc2hvd0FsYXJtRnVuY3Rpb24oKTsNCnNldEludGVydmFsKHRpbWVDaGFuZ2VGdW5jdGlvbiwgMTAwMCk7DQpidG4uYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCBhbGFybVNldEZ1bmN0aW9uKTsNCnRpbWVDaGFuZ2VGdW5jdGlvbigpOw0KDQoJPC9zY3JpcHQ+DQo8L2JvZHk+DQoNCjwvaHRtbD4NCg=="></iframe>
+</div>
+
+<div id="WorldClock" class="tabcontent">
+    <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQo8aGVhZD4NCjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4NCjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4NCjx0aXRsZT5Xb3JsZCBDbG9jazwvdGl0bGU+DQo8c3R5bGU+DQogICAgYm9keSB7DQogICAgICAgIGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsNCiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOw0KICAgICAgICBtYXJnaW46IDA7DQogICAgICAgIHBhZGRpbmc6IDA7DQogICAgICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMzVkZWcsICMwMEJGRkYsICNGNURFQjMpOw0KICAgIH0gICAgDQogICAgaDEgew0KICAgICAgICBtYXJnaW4tdG9wOiAyMHB4Ow0KICAgIH0NCiAgICAjY2xvY2tzIHsNCiAgICAgICAgZGlzcGxheTogZmxleDsNCiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsNCiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsNCiAgICAgICAgbWFyZ2luLXRvcDogMjBweDsNCiAgICB9DQogICAgLmNsb2NrIHsNCiAgICAgICAgYm9yZGVyOiAycHggc29saWQgIzMzMzsNCiAgICAgICAgYm9yZGVyLXJhZGl1czogMTBweDsNCiAgICAgICAgcGFkZGluZzogMjBweDsNCiAgICAgICAgd2lkdGg6IGNhbGMoMTAwJSAtIDQwcHgpOyAvKiBBZGp1c3RpbmcgYm94IHNpemUgKi8NCiAgICAgICAgbWF4LXdpZHRoOiA0MDBweDsNCiAgICAgICAgbWFyZ2luLWJvdHRvbTogMjBweDsNCiAgICB9DQogICAgLmNsb2NrIGgyIHsNCiAgICAgICAgbWFyZ2luLXRvcDogMDsNCiAgICB9DQo8L3N0eWxlPg0KPC9oZWFkPg0KPGJvZHk+DQo8aDE+V29ybGQgQ2xvY2s8L2gxPg0KPGRpdiBpZD0iY2xvY2tzIj4NCiAgICA8ZGl2IGlkPSJsb25kb24iIGNsYXNzPSJjbG9jayI+DQogICAgICAgIDxoMj5Mb25kb248L2gyPg0KICAgICAgICA8ZGl2IGlkPSJsb25kb25UaW1lIj48L2Rpdj4NCiAgICA8L2Rpdj4NCiAgICA8ZGl2IGlkPSJuZXdEZWxoaSIgY2xhc3M9ImNsb2NrIj4NCiAgICAgICAgPGgyPk5ldyBEZWxoaTwvaDI+DQogICAgICAgIDxkaXYgaWQ9Im5ld0RlbGhpVGltZSI+PC9kaXY+DQogICAgPC9kaXY+DQogICAgPGRpdiBpZD0ibmV3WW9yayIgY2xhc3M9ImNsb2NrIj4NCiAgICAgICAgPGgyPk5ldyBZb3JrPC9oMj4NCiAgICAgICAgPGRpdiBpZD0ibmV3WW9ya1RpbWUiPjwvZGl2Pg0KICAgIDwvZGl2Pg0KICAgIDxkaXYgaWQ9InRvcm9udG8iIGNsYXNzPSJjbG9jayI+DQogICAgICAgIDxoMj5Ub3JvbnRvPC9oMj4NCiAgICAgICAgPGRpdiBpZD0idG9yb250b1RpbWUiPjwvZGl2Pg0KICAgIDwvZGl2Pg0KPC9kaXY+DQoNCjxzY3JpcHQ+DQpmdW5jdGlvbiB1cGRhdGVDbG9ja3MoKSB7DQogICAgY29uc3QgbG9uZG9uVGltZSA9IG5ldyBEYXRlKCkudG9Mb2NhbGVTdHJpbmcoImVuLVVTIiwge3RpbWVab25lOiAiRXVyb3BlL0xvbmRvbiJ9KTsNCiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgibG9uZG9uVGltZSIpLnRleHRDb250ZW50ID0gbG9uZG9uVGltZTsNCg0KICAgIGNvbnN0IG5ld0RlbGhpVGltZSA9IG5ldyBEYXRlKCkudG9Mb2NhbGVTdHJpbmcoImVuLVVTIiwge3RpbWVab25lOiAiQXNpYS9Lb2xrYXRhIn0pOw0KICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJuZXdEZWxoaVRpbWUiKS50ZXh0Q29udGVudCA9IG5ld0RlbGhpVGltZTsNCg0KICAgIGNvbnN0IG5ld1lvcmtUaW1lID0gbmV3IERhdGUoKS50b0xvY2FsZVN0cmluZygiZW4tVVMiLCB7dGltZVpvbmU6ICJBbWVyaWNhL05ld19Zb3JrIn0pOw0KICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJuZXdZb3JrVGltZSIpLnRleHRDb250ZW50ID0gbmV3WW9ya1RpbWU7DQoNCiAgICBjb25zdCB0b3JvbnRvVGltZSA9IG5ldyBEYXRlKCkudG9Mb2NhbGVTdHJpbmcoImVuLVVTIiwge3RpbWVab25lOiAiQW1lcmljYS9Ub3JvbnRvIn0pOw0KICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJ0b3JvbnRvVGltZSIpLnRleHRDb250ZW50ID0gdG9yb250b1RpbWU7DQp9DQoNCi8vIFVwZGF0ZSBjbG9ja3MgZXZlcnkgc2Vjb25kDQpzZXRJbnRlcnZhbCh1cGRhdGVDbG9ja3MsIDEwMDApOw0KDQovLyBJbml0aWFsIHVwZGF0ZQ0KdXBkYXRlQ2xvY2tzKCk7DQo8L3NjcmlwdD4NCjwvYm9keT4NCjwvaHRtbD4=/iframe>
+</div>
+
+<div id="PomodoroClock" class="tabcontent">
+    <iframe src="data:text/html;base64,"></iframe>
+</div>
+
+<div id="Stopwatch" class="tabcontent">
+    <iframe src="data:text/html;base64,"></iframe>
+</div>
+
+<div id="Timer" class="tabcontent">
+    <iframe src="data:text/html;base64,"></iframe>
+</div>
+
 <script>
-function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+    // Function to open city tab content
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
+        // Get all elements with class="tablink" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
 
-  // Show the current tab, and add an "active" class to the link that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
 </script>
-  </body>
+</body>
 </html>
