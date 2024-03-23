@@ -123,32 +123,21 @@
 
 <body>
     <div class="clock">
-        <h1>
-            Alarm Clock
-        </h1>
-        <div class="time" id="time">
-            00:00:00
-        </div>
+        <h1>Alarm Clock</h1>
+        <div class="time" id="time">00:00:00</div>
         <div class="input-row">
             <div class="input-field">
-                <label for="alarmDate">
-                    Select Date:
-                </label>
+                <label for="alarmDate">Select Date:</label>
                 <input type="date" id="alarmDate" class="alarm-input" min="">
             </div>
             <div class="input-field">
-                <label for="alarmTime">
-                    Select Time:
-                </label>
+                <label for="alarmTime">Select Time:</label>
                 <input type="time" id="alarmTime" class="alarm-input">
             </div>
-            <button id="setAlarm">
-                Set Alarm
-            </button>
+            <button id="setAlarm">Set Alarm</button>
         </div>
-        <div class="alarms" id="alarms">
-        </div>
-        <audio src="https://soundbible.com/2061-Loud-Alarm-Clock-Buzzer.mp3" id="alarm" volume="1.0"></audio>
+        <div class="alarms" id="alarms"></div>
+        <audio src="Loud_Alarm_Clock_Buzzer-Muk1984-493547174.mp3" id="alarm" volume="1.0"></audio>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -161,6 +150,7 @@ let interVal;
 let maxValue = 3;
 let cnt = 0;
 let almTimesArray = [];
+let alarmSound = document.getElementById("alarm");
 
 function timeChangeFunction() {
     let curr = new Date();
@@ -194,24 +184,29 @@ function alarmSetFunction() {
         let alarmDiv = document.createElement("div");
         alarmDiv.classList.add("alarm");
         alarmDiv.innerHTML = `
-            <span>
-            ${selectedDate.toLocaleString()}
-            </span>
-            <button class="delete-alarm">
-            Delete
-            </button>
+            <span>${selectedDate.toLocaleString()}</span>
+            <button class="close-alarm">Close</button>
+            <button class="snooze-alarm">Snooze</button>
         `;
-        alarmDiv
-            .querySelector(".delete-alarm")
-            .addEventListener("click", () => {
-                alarmDiv.remove();
-                cnt--;
-                clearTimeout(interVal);
-                const idx = almTimesArray.indexOf(selectedDate.toString());
-                if (idx !== -1) {
-                    almTimesArray.splice(idx, 1);
-                }
-            });
+        alarmDiv.querySelector(".close-alarm").addEventListener("click", () => {
+            alarmDiv.remove();
+            cnt--;
+            clearTimeout(interVal);
+            const alarmIndex = almTimesArray.indexOf(selectedDate.toString());
+            if (alarmIndex !== -1) {
+                almTimesArray.splice(alarmIndex, 1);
+            }
+            alarmSound.pause();
+        });
+        alarmDiv.querySelector(".snooze-alarm").addEventListener("click", () => {
+            const snoozeMinutes = 5; // Snooze time in minutes
+            const snoozeTime = new Date(now.getTime() + snoozeMinutes * 60000);
+            alarmDiv.remove();
+            cnt--;
+            clearTimeout(interVal);
+            alarmSound.pause();
+            setSnoozeAlarm(snoozeTime);
+        });
         interVal = setTimeout(() => {
             alarmDiv.remove();
             cnt--;
@@ -219,7 +214,8 @@ function alarmSetFunction() {
             if (alarmIndex !== -1) {
                 almTimesArray.splice(alarmIndex, 1);
             }
-            document.getElementById("alarm").play(); // Play the alarm sound
+            alarmSound.play(); // Play the alarm sound
+            showAlarmFunction();
         }, timeUntilAlarm);
         contan.appendChild(alarmDiv);
         cnt++;
@@ -232,9 +228,9 @@ function alarmSetFunction() {
 function showAlarmFunction() {
     let alarms = contan.querySelectorAll(".alarm");
     alarms.forEach((alarm) => {
-        let deleteButton = alarm.querySelector(".delete-alarm");
+        let deleteButton = alarm.querySelector(".close-alarm");
         deleteButton.addEventListener("click", () => {
-            alarmDiv.remove();
+            alarm.remove();
             cnt--;
             clearTimeout(interVal);
             const alarmIndex = almTimesArray.indexOf(selectedDate.toString());
@@ -245,10 +241,24 @@ function showAlarmFunction() {
     });
 }
 
-showAlarmFunction();
+function setSnoozeAlarm(snoozeTime) {
+    let snoozeDiv = document.createElement("div");
+    snoozeDiv.classList.add("alarm");
+    snoozeDiv.innerHTML = `
+        <span>Snoozing for 5 minutes...</span>
+    `;
+    contan.appendChild(snoozeDiv);
+    setTimeout(() => {
+        alarmSetFunction();
+        snoozeDiv.remove();
+    }, 300000); // 5 minutes in milliseconds
+}
+
 setInterval(timeChangeFunction, 1000);
 btn.addEventListener("click", alarmSetFunction);
 timeChangeFunction();
-</script>
+
+    </script>
 </body>
+
 </html>
