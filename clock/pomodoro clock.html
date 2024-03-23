@@ -144,6 +144,9 @@
             <button id="clock-button">Start</button>
             <button id="reset-button" disabled>Reset</button>
         </div>
+        
+      <audio src="http://soundbible.com/mp3/service-bell_daniel_simion.mp3" id="bell-audio" volume="1.0"></audio>
+
     </div>
 
 </div>
@@ -221,104 +224,106 @@
         // Click Handlers for changing the break and session lengths.
         // If the clock is running, don't allow the times to be changed.
         $('#break-minus').on('click', function () {
-            if (clockRunning) {
-                return;
-            }
+    if (clockRunning) {
+        return;
+    }
 
-            // Don't allow negative time values
-            if (breakTime > 0 && clockType === 'break') {
-                breakTime -= 60;
-                clockTime = breakTime;
-                updateBreakIndicator();
-                updateClockCounter();
-            } else if (breakTime > 0) {
-                // Increment the time by one minute
-                breakTime -= 60;
-                updateBreakIndicator();
-            }
-        });
+    // Don't allow negative time values
+    if (breakTime > 0 && clockType === 'break') {
+        breakTime -= 60;
+        clockTime = breakTime;
+        updateBreakIndicator();
+        updateClockCounter();
+    } else if (breakTime > 0) {
+        // Increment the time by one minute
+        breakTime -= 60;
+        updateBreakIndicator();
+    }
+});
 
-        $('#break-plus').on('click', function () {
-                        if (clockRunning) {
-                return;
-            }
+$('#break-plus').on('click', function () {
+    if (clockRunning) {
+        return;
+    }
 
-            if (clockType === 'break') {
-                breakTime += 60;
-                clockTime = breakTime;
-                updateBreakIndicator();
-                updateClockCounter();
-            } else {
-                breakTime += 60;
-                updateBreakIndicator();
-            }
-        });
+    if (clockType === 'break') {
+        breakTime += 60;
+        clockTime = breakTime;
+        updateBreakIndicator();
+        updateClockCounter();
+    } else {
+        breakTime += 60;
+        updateBreakIndicator();
+    }
+});
 
-        $('#session-minus').on('click', function () {
-            if (clockRunning) {
-                return;
-            }
+$('#session-minus').on('click', function () {
+    if (clockRunning) {
+        return;
+    }
 
-            if (sessionTime > 0) {
-                sessionTime -= 60;
-                resetApp();
-            }
-        });
+    if (sessionTime > 0) {
+        sessionTime -= 60;
+        resetApp();
+    }
+});
 
-        $('#session-plus').on('click', function () {
-            if (clockRunning) {
-                return;
-            }
-            sessionTime += 60;
-            resetApp();
-        });
+$('#session-plus').on('click', function () {
+    if (clockRunning) {
+        return;
+    }
+    sessionTime += 60;
+    resetApp();
+});
 
 
-        // Timer function. When the session time runs out, switch to break time,
-        // and vice-versa.
-        var countdown = function () {
-            if (clockTime > 0 && clockRunning) {
-                clockTime -= 1;
-                updateClockCounter();
-                if (clockType === 'session') {
-                    updateProgress(clockTime / sessionTime * 100);
-                } else {
-                    updateProgress(clockTime / breakTime * 100);
-                }
-            } else if (clockTime === 0 && clockRunning) {
-                if (clockType === 'session') {
-                    $('#clock-label').text('Break');
-                    clockType = 'break';
-                    clockTime = breakTime;
-                } else if (clockType === 'break') {
-                    $('#clock-label').text('Session');
-                    clockType = 'session';
-                    clockTime = sessionTime;
-                }
-            }
-        };
+// Timer function. When the session time runs out, switch to break time,
+// and vice-versa.
+var countdown = function () {
+    if (clockTime > 0 && clockRunning) {
+        clockTime -= 1;
+        updateClockCounter();
+        if (clockType === 'session') {
+            updateProgress(clockTime / sessionTime * 100);
+        } else {
+            updateProgress(clockTime / breakTime * 100);
+        }
+    } else if (clockTime === 0 && clockRunning) {
+        if (clockType === 'session') {
+            $('#clock-label').text('Break');
+            clockType = 'break';
+            clockTime = breakTime;
+        } else if (clockType === 'break') {
+            $('#clock-label').text('Session');
+            clockType = 'session';
+            clockTime = sessionTime;
+        }
+        // Play the bell sound when the timer ends
+        document.getElementById('bell-audio').play();
+    }
+};
 
-        // Start-Stop Click Handler
-        $('#clock-button').on('click', function () {
-            if (clockRunning) {
-                clockRunning = false;
-                window.clearInterval(countdownID);
-                $('#clock-button').text('Resume');
-                $('#reset-button').attr('disabled', false);
-            } else {
-                clockRunning = true;
-                countdownID = window.setInterval(countdown, 1000);
-                $('#clock-button').text('Pause');
-                $('#reset-button').attr('disabled', true);
-            }
-        });
+// Start-Stop Click Handler
+$('#clock-button').on('click', function () {
+    if (clockRunning) {
+        clockRunning = false;
+        window.clearInterval(countdownID);
+        $('#clock-button').text('Resume');
+        $('#reset-button').attr('disabled', false);
+    } else {
+        clockRunning = true;
+        countdownID = window.setInterval(countdown, 1000);
+        $('#clock-button').text('Pause');
+        $('#reset-button').attr('disabled', true);
+    }
+});
 
-        // Reset Click Handler
-        $('#reset-button').on('click', function () {
-            resetApp();
-        });
+// Reset Click Handler
+$('#reset-button').on('click', function () {
+    resetApp();
+});
 
-    });
+});
 </script>
 </body>
 </html>
