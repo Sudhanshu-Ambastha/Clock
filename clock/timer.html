@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Timer</title>
@@ -6,165 +6,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Heebo:wght@100&display=swap">
     <style>
-        body {
-            background: linear-gradient(45deg, #007bff, #27ae60);
-            background-size: cover; 
-            font-family: 'Heebo', sans-serif;
-            color: #088b8b;
+        @import url("https://fonts.googleapis.com/css?family=Heebo:wght@100&display=swap"); 
+
+        *{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        .center {
-            display: flex;
+        html{
+            font-family: "Heebo", Sans-Serif;
+            color:#088b8b;
+        }
+        .center{
+            display:flex;
             justify-content: center;
             align-items: center;
+        }
+        .main-container{
+            position: relative;
             width: 100%;
             height: 100vh;
+            background-color: orange;
         }
-        .circle-container {
-            width: 480px;
-            height: 480px;
+        .circle-container{
+            width: 400px;
+            height: 400px;
             background-color: #ddd;
             border-radius: 50%;
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             overflow: hidden;
             z-index: 1;
         }
-        .semicircle {
-            width: 50%;
-            height: 100%;
+        .semicircle{
+            width: 200px;
+            height: 400px;
             position: absolute;
             top: 0;
-            left: 0;
-            transform-origin: right center;
+            left: 50%;
+            transform-origin: left;
+            transform: translateX(-50%);
         }
-        .semicircle:nth-child(1) {
+        .semicircle:nth-child(1){
             background-color: #088b8b;
             z-index: 2;
+            border-radius: 200px 0 0 200px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
-        .semicircle:nth-child(2) {
+        .semicircle:nth-child(2){
             background-color: #088b8b;
             z-index: 3;
+            border-radius: 0 200px 200px 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
-        .semicircle:nth-child(3) {
-            background-color: #ddd; 
+        .semicircle:nth-child(3){
+            background-color: #ddd;
             z-index: 4;
-            display: none;
         }
-        .outermost-circle {
+        .outermost-circle{
             width: 390px;
             height: 390px;
             background-color: white;
             border-radius: 50%;
             z-index: 5;
-            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        .timer-container {
+        .timer-container{
             width: 330px;
-            height: 100px;
+            height: 200px;
             z-index: 6;
-        }
-        .timer {
-            width: 440px;
-            height: 100px;
-            z-index: 7;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 70px;
-            font-weight: 100;
-            color: #088b8b;
+        }
+        .timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .timer div {
-            margin: 0 10px;
+            font-size: 70px;
+            font-weight: 100;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px 0 10px;
         }
         .timer .colon {
+            background-color: transparent;
+            width: 10px;
             margin: 0;
+            margin-left: 0;
+            margin-right: 0;
             padding-bottom: 15px;
-        }
-        .timer.warning {
-            color: red;
         }
     </style>
 </head>
 <body>
     <div class="main-container center">
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="outermost-circle"></div>
-    </div>
-    <div class="timer-container center">
-        <div class="timer"></div>
-    </div>
-<script>
-    const semicircle = document.querySelectorAll('.semicircle');
-    const timer = document.querySelector('.timer');
+        <div class="circle-container">
+            <div class="semicircle"></div>
+            <div class="semicircle"></div>
+            <div class="semicircle"></div>
+            <div class="outermost-circle"></div>
+        </div>
+        <div class="timer-container">
+            <div class="timer center"></div>
+        </div>
+    </div> 
+    <script>
+        const semicircles = document.querySelectorAll('.semicircle');
+        const timer = document.querySelector('.timer');
 
-    const hr = 0;
-    const min = 0;
-    const sec = 5;
+        const hr = 0;
+        const min = 0;
+        const sec = 15;
 
-    const setTime = (hr * 3600000) + (min * 60000) + (sec * 1000);
-    const startTime = Date.now();
-    const futureTime = startTime + setTime;
+        const hours = hr * 3600000;
+        const minutes = min * 60000;
+        const seconds = sec * 1000;
+        const setTime = hours + minutes + seconds;
+        const startTime = Date.now();
+        const futureTime = startTime + setTime;
 
-    const timerLoop = setInterval(countDownTimer);
-    countDownTimer();
+        const timerLoop = setInterval(countDownTimer, 1000);
+        countDownTimer();
 
-    function countDownTimer() {
-        const currentTime = Date.now();
-        const remainingTime = futureTime - currentTime;
-        const angle = (remainingTime / setTime) * 360;
+        function countDownTimer() {
+            const currentTime = Date.now();
+            const remainingTime = futureTime - currentTime;
+            const angle = (remainingTime / setTime) * 360;
 
-        if (angle > 180) {
-            semicircle[2].style.display = 'none';
-            semicircle[0].style.transform = `rotate(${180}deg)`;
-            semicircle[1].style.transform = `rotate(${angle}deg)`;
-        } else {
-            semicircle[2].style.display = 'block'; 
-            semicircle[0].style.transform = `rotate(${180}deg)`;
-            semicircle[1].style.transform = `rotate(${angle}deg)`; 
-        }
+            if (angle > 180) {
+                semicircles[2].style.display = 'none';
+                semicircles[0].style.transform = 'rotate(180deg)';
+                semicircles[1].style.transform = 'rotate(180deg)';
+            } else {
+                semicircles[2].style.display = 'block';
+                semicircles[0].style.transform = `rotate(180deg)`;
+                semicircles[1].style.transform = `rotate(${angle}deg)`;
+            }
 
-        const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-        const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-        const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-
-        timer.innerHTML = `
-            <div>${hours}</div>
-            <div class="colon">:</div>
-            <div>${mins}</div>
-            <div class="colon">:</div>
-            <div>${secs}</div>
-        `;
-
-        if (remainingTime <= 6000) {
-            semicircle[0].style.backgroundColor = "red";
-            semicircle[1].style.backgroundColor = "red";
-            timer.classList.add('warning');
-        }
-
-        if (remainingTime < 0) {
-            clearInterval(timerLoop);
-            semicircle[0].style.display = `none`;
-            semicircle[1].style.display = `none`;
-            semicircle[2].style.display = `none`;
+            const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
+            const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
+            const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
 
             timer.innerHTML = `
-                <div>00</div>
+                <div>${hrs}</div>
                 <div class="colon">:</div>
-                <div>00</div>
+                <div>${mins}</div>
                 <div class="colon">:</div>
-                <div>00</div>
+                <div>${secs}</div>
             `;
-            timer.classList.remove('warning');
+
+            if (remainingTime <= 6000) {
+                semicircles[0].style.backgroundColor = "red";
+                semicircles[1].style.backgroundColor = "red";
+                timer.style.color = "red";
+            }
+
+            if (remainingTime < 0) {
+                clearInterval(timerLoop);
+                semicircles[0].style.display = 'none';
+                semicircles[1].style.display = 'none';
+                semicircles[2].style.display = 'none';
+
+                timer.innerHTML = `
+                    <div>00</div>
+                    <div class="colon">:</div>
+                    <div>00</div>
+                    <div class="colon">:</div>
+                    <div>00</div>
+                `;
+                timer.classList.remove('warning');
             timer.style.color = "lightgray";
 
             alert("Time is up!");
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
