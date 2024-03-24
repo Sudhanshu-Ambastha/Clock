@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #e3edf7;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative; /* Position container relatively for absolute positioning inside */
+}
+
+.heading {
+  position: absolute;
+  top: -80px; /* Adjust the value as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.countdown-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.skill {
+  position: absolute; /* Position the circles absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the circles */
+}
+
+
+.outer {
+  height: 350px; /* Increase the size of the circle */
+  width: 350px; /* Increase the size of the circle */
+  border-radius: 50%;
+  padding: 20px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.inner {
+  height: 310px; /* Adjust as needed */
+  width: 310px; /* Adjust as needed */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+}
+
+#number {
+  font-weight: 600;
+  color: #555;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes anim {
+  100% {
+    stroke-dashoffset: 376; /* Adjust as needed */
+  }
+}
+
+/* countdown.css */
+
+/* Add the styles for the countdown timer and buttons below */
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  padding: inherit;
+  width: inherit;
+  border: 3px solid hotpink;
+  gap: 2%;
+  background: #1255;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px black, 0 2px 5px black;
+}
+
+.displey {
+  width: 24%;
+  padding: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 2px dimgray;
+  border-radius: inherit;
+}
+
+.displey p {
+  font-size: 3em;
+  font-weight: 900;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type="number"] {
+  font-size: 3em;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  width: 90%;
+  height: inherit;
+  border: none;
+  outline: none;
+  display: none;
+  background: inherit;
+  color: #fff;
+}
+
+.btnbox {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px; /* Adjust as needed */
+}
+
+button {
+  width: 130px;
+  padding: 7px 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-radius: 20px;
+  color: #fff;
+  border: 3px solid #fff;
+  transition: all .5s;
+  box-shadow: 0 2px 5px black;
+}
+
+button:first-child {
+  background: blue;
+}
+
+button:last-child {
+  background: #999;
+}
+
+h2 {
+  font-size: 2.5em;
+  color: #ff0;
+  text-transform: capitalize;
+  -webkit-text-stroke: .5px #f00;
+  font-weight: 900;
+  padding: 8%;
+}
+  </style>
+
+  <title>Countdown Timer</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Countdown Timer</h2>
+    <div class="skill">
+      <div class="outer">
+        <div class="inner">
+          <div id="number"></div>
+        </div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="350px" height="350px">
+        <defs>
+          <linearGradient id="GradientColor">
+            <stop offset="0%" stop-color="#e91e63" />
+            <stop offset="100%" stop-color="#673ab7" />
+          </linearGradient>
+        </defs>
+        <circle cx="175" cy="175" r="150" stroke-linecap="round" />
+      </svg>
+    </div>
+    <div class="countdown-container">
+      <div class="countdown">
+        <div class="box">
+          <div class="displey">
+            <p id="hour">00</p>
+            <input type="number" name="h" id="h" min="0" value="">
+          </div>
+          <div class="displey">
+            <p id="min">00</p>
+            <input type="number" name="m" id="m" min="0" max="59" value="">
+          </div>
+          <div class="displey">
+            <p id="sec">00</p>
+            <input type="number" name="s" id="s" min="0" max="59" value="">
+          </div>
+          <div class="displey">
+            <p id="msec">00</p>
+          </div>
+        </div>
+        <div class="btnbox">
+          <button id="setTimerBtn">Set Timer</button>
+          <button id="startBtn" disabled>Start</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // script.js
+
+// Countdown Timer Script
+let hour = document.querySelector("#hour");
+let min = document.querySelector("#min");
+let sec = document.querySelector("#sec");
+let h = document.querySelector("#h");
+let m = document.querySelector("#m");
+let s = document.querySelector("#s");
+let ms = document.querySelector("#msec");
+let audio = new Audio('/mixkit-circus-lose-2030.wav')
+
+let interval;
+let se = 0;
+let mi = 0;
+let ho = 0;
+let mls = 1;
+
+let setTimerBtn = document.querySelector("#setTimerBtn");
+let startBtn = document.querySelector("#startBtn");
+
+setTimerBtn.addEventListener('click', () => {
+  startBtn.removeAttribute('disabled');
+  startBtn.style.background = 'green';
+  setTime();
+});
+
+startBtn.addEventListener('click', () => {
+  startTimer();
+});
+
+const setTime = () => {
+  h.style.display = 'block';
+  m.style.display = 'block';
+  s.style.display = 'block';
+  hour.style.display = 'none';
+  sec.style.display = 'none';
+  min.style.display = 'none';
+  h.focus();
+  clearInterval(interval);
+  se.value = 0;
+  mi.value = 0;
+  ho.value = 0;
+  mls.value = 1;
+  ms.innerText = '00';
+  h.value = 0;
+  m.value = 0;
+  s.value = 0;
+};
+
+const startTimer = () => {
+  if (h.value[0] == 0) {
+    ho = h.value.slice(1, h.value.length);
+  } else { ho = h.value; }
+  if (m.value[0] == 0) {
+    mi = m.value.slice(1, m.value.length);
+  } else { mi = m.value; }
+  if (s.value[0] == 0) {
+    se = s.value.slice(1, s.value.length);
+  } else { se = s.value; }
+  if ((h.value > 99 || m.value > 59 || s.value > 59) || (h.value == 0 && m.value == 0 && s.value == 0)) {
+    alert('Please Inter valid time');
+  } else {
+    h.style.display = 'none';
+    m.style.display = 'none';
+    s.style.display = 'none';
+    hour.style.display = 'block';
+    sec.style.display = 'block';
+    min.style.display = 'block';
+    startBtn.setAttribute('disabled', 'true');
+    startBtn.style.background = '#999';
+    start();
+  }
+};
+
+const start = () => {
+  interval = setInterval(() => {
+    mls--;
+    if (mls == 0) {
+      mls = 99;
+      se--;
+    }
+    if (se < 0) {
+      se = 59;
+      mi--;
+    }
+    if (mi < 0) {
+      mi = 59;
+      ho--;
+    }
+    ms.innerText = mls < 10 ? '0' + mls : mls;
+    sec.innerText = se < 10 ? "0" + se : se;
+    min.innerText = mi < 10 ? '0' + mi : mi;
+    hour.innerText = ho < 10 ? '0' + ho : ho;
+    timeOver();
+  }, 10);
+  ho = ho == 0 ? '0' + ho : ho;
+  mi = mi == 0 ? '0' + mi : mi;
+  se = se == 0 ? '0' + se : se;
+};
+
+const timeOver = () => {
+  if (se == 0 && mi == 0 && ho == 0) {
+    ms.innerText = '00';
+    audio.play();
+    clearInterval(interval);
+  }
+};
+
+// Circular Progress Bar Script
+let number = document.getElementById("number");
+let counter = 0;
+setInterval(() => {
+  if (counter == 65) {
+    clearInterval();
+  } else {
+    counter += 1;
+    number.innerHTML = counter + "%";
+  }
+}, 30);
+
+  </script>
+</body>
+
+</html>
