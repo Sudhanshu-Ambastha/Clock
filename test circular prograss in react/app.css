@@ -1,0 +1,49 @@
+:root {
+  ---color1: #12c2e9;
+  ---color2: #c471ed;
+  ---color3: #f64f59;
+}
+
+.svg {
+  width: 30vw;
+}
+
+.progressInput {
+  width: 30vw;
+  margin-top: 30px;
+  height: 10px;
+  -webkit-appearance: none;
+  background-image: linear-gradient(
+    to right,
+    var(--color1),
+    var(--color2),
+    var(--color3)
+  );
+  border-radius: 5px;
+}
+
+.progressInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #111;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px 3px rgba(85, 85, 85, 0.7);
+}
+
+.circle-background {
+  fill: none;
+  stroke: #ddd;
+}
+
+.circular-progress {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.circle-text {
+  font-size: 3rem;
+  font-weight: bold;
+}
