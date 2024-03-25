@@ -5,165 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  background: #e3edf7;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  position: relative; /* Position container relatively for absolute positioning inside */
-}
-
-.heading {
-  position: absolute;
-  top: -80px; /* Adjust the value as needed */
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 100%;
-}
-
-.countdown-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.skill {
-  position: absolute; /* Position the circles absolutely */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the circles */
-}
-
-
-.outer {
-  height: 350px; /* Increase the size of the circle */
-  width: 350px; /* Increase the size of the circle */
-  border-radius: 50%;
-  padding: 20px;
-  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-}
-
-.inner {
-  height: 310px; /* Adjust as needed */
-  width: 310px; /* Adjust as needed */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
-    -0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
-}
-
-#number {
-  font-weight: 600;
-  color: #555;
-}
-
-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@keyframes anim {
-  100% {
-    stroke-dashoffset: 376; /* Adjust as needed */
-  }
-}
-
-/* countdown.css */
-
-/* Add the styles for the countdown timer and buttons below */
-
-.box {
-  display: flex;
-  justify-content: space-between;
-  padding: inherit;
-  width: inherit;
-  border: 3px solid hotpink;
-  gap: 2%;
-  background: #1255;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px black, 0 2px 5px black;
-}
-
-.displey {
-  width: 24%;
-  padding: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 2px dimgray;
-  border-radius: inherit;
-}
-
-.displey p {
-  font-size: 3em;
-  font-weight: 900;
-  color: red;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-input[type="number"] {
-  font-size: 3em;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 800;
-  width: 90%;
-  height: inherit;
-  border: none;
-  outline: none;
-  display: none;
-  background: inherit;
-  color: #fff;
-}
-
-.btnbox {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px; /* Adjust as needed */
-}
-
-button {
-  width: 130px;
-  padding: 7px 10px;
-  font-size: 1.1em;
-  font-weight: 600;
-  border-radius: 20px;
-  color: #fff;
-  border: 3px solid #fff;
-  transition: all .5s;
-  box-shadow: 0 2px 5px black;
-}
-
-button:first-child {
-  background: blue;
-}
-
-button:last-child {
-  background: #999;
-}
-
-h2 {
-  font-size: 2.5em;
-  color: #ff0;
-  text-transform: capitalize;
-  -webkit-text-stroke: .5px #f00;
-  font-weight: 900;
-  padding: 8%;
-}
   </style>
 
   <title>Countdown Timer</title>
@@ -225,7 +66,7 @@ let h = document.querySelector("#h");
 let m = document.querySelector("#m");
 let s = document.querySelector("#s");
 let ms = document.querySelector("#msec");
-let audio = new Audio('/mixkit-circus-lose-2030.wav')
+let audio = new Audio('Timer clock.m4a')
 
 let interval;
 let se = 0;
@@ -335,7 +176,6 @@ setInterval(() => {
     number.innerHTML = counter + "%";
   }
 }, 30);
-
   </script>
 </body>
 
