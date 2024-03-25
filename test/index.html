@@ -73,8 +73,8 @@ circle{
   fill: none;
   stroke: url(#GradientColor);
   stroke-width: 20px;
-  stroke-dasharray: 472;
-  stroke-dashoffset: 472;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
   animation: anim 2s linear forwards;
 }
 svg {
@@ -332,10 +332,10 @@ const timeOver = () => {
 };
 
 // Circular Progress Bar Script
-let number = document.getElementById("number");
+let number = document.getElementById("msec");
 let counter = 0;
 setInterval(() => {
-  if (counter == 65) {
+  if (counter == ) {
     clearInterval();
   } else {
     counter += 1;
