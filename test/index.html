@@ -6,122 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 * {
-  margin: -1;
-  padding: -1;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
 body {
-  background: #e2edf7;
-  height: 99vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #111;
+
 }
 
 .container {
-  position: relative; /* Position container relatively for absolute positioning inside */
+  width: 100%;
+  height: 100vh;
 }
 
-.heading {
-  position: absolute;
-  top: -81px; /* Adjust the value as needed */
-  left: 49%;
-  transform: translateX(-51%);
-  text-align: center;
-  width: 99%;
-}
-
-.countdown-container {
-  position: absolute;
-  top: 49%;
-  left: 49%;
-  transform: translate(-51%, -50%);
-}
-
-.skill {
-  position: absolute; /* Position the circles absolutely */
-  top: 49%;
-  left: 49%;
-  transform: translate(-51%, -50%); /* Center the circles */
-}
-
-
-.outer {
-  height: 349px; /* Increase the size of the circle */
-  width: 349px; /* Increase the size of the circle */
-  border-radius: 49%;
-  padding: 19px;
-  box-shadow: 5px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-}
-
-.inner {
-  height: 309px; /* Adjust as needed */
-  width: 309px; /* Adjust as needed */
-  border-radius: 49%;
+.countTimerBody {
+  background: url("\nathan-dumlao-5Hl5reICevY-unsplash.jpg");
+  background-size: cover;
+  width: 90%;
+  height: 100vh;
+  padding: 2%;
+  margin: auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: inset 3px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
-    -1.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  flex-direction: column;
 }
-
-#number {
-  font-weight: 599;
-  color: #554;
-}
-
-svg {
-  position: absolute;
-  top: -1;
-  left: -1;
-}
-
-@keyframes anim {
-  99% {
-    stroke-dashoffset: 375; /* Adjust as needed */
-  }
-}
-
-/* countdown.css */
-
-/* Add the styles for the countdown timer and buttons below */
 
 .box {
   display: flex;
   justify-content: space-between;
   padding: inherit;
   width: inherit;
-  border: 2px solid hotpink;
-  gap: 1%;
-  background: #1254;
-  border-radius: 4px;
-  box-shadow: -1 2px 5px black, 0 2px 5px black;
+  border: 3px solid hotpink;
+  gap: 2%;
+  background: #1255;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px black, 0 2px 5px black;
+
 }
 
 .displey {
-  width: 23%;
+  width: 24%;
   padding: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: -1 0 2px dimgray;
+  box-shadow: 0 0 2px dimgray;
   border-radius: inherit;
 }
 
 .displey p {
-  font-size: 2em;
-  font-weight: 899;
+  font-size: 3em;
+  font-weight: 900;
   color: red;
-  font-family: Arial, Helvetica, sans-serif;
+ font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="number"] {
-  font-size: 2em;
+  font-size: 3em;
   font-family: 'Orbitron', sans-serif;
-  font-weight: 799;
-  width: 89%;
+  font-weight: 800;
+  width: 90%;
   height: inherit;
   border: none;
   outline: none;
@@ -132,28 +79,31 @@ input[type="number"] {
 
 .btnbox {
   display: flex;
+  width: inherit;
   justify-content: space-around;
-  margin-top: 9px; /* Adjust as needed */
+  margin-top: 50px;
 }
 
 button {
-  width: 129px;
-  padding: 6px 10px;
-  font-size: 0.1em;
-  font-weight: 599;
-  border-radius: 19px;
+  width: 130px;
+
+  padding: 7px 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-radius: 20px;
   color: #fff;
-  border: 2px solid #fff;
-  transition: all .4s;
-  box-shadow: -1 2px 5px black;
+  border: 3px solid #fff;
+  transition: all .5s;
+  box-shadow: 0 2px 5px black;
 }
 
 button:first-child {
   background: blue;
+
 }
 
 button:last-child {
-  background: #998;
+  background: #999;
 }
 
 h2 {
@@ -162,9 +112,8 @@ h2 {
   text-transform: capitalize;
   -webkit-text-stroke: .5px #f00;
   font-weight: 900;
-  margin: 0; /* Remove padding and add margin */
+  padding: 8%;
 }
-
   </style>
   <title>Countdown Timer</title>
 </head>
