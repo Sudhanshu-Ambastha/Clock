@@ -8,31 +8,83 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: #111;
-
+  background: #e3edf7;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  width: 100%;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Position container relatively for absolute positioning inside */
 }
 
-.countTimerBody {
-  background: url("\nathan-dumlao-5Hl5reICevY-unsplash.jpg");
-  background-size: cover;
-  width: 90%;
-  height: 100vh;
-  padding: 2%;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.countdown-container {
+  position: absolute; /* Position countdown container absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center countdown container */
+  z-index: 1; /* Ensure it's above the circles */
 }
+
+.countdown {
+  margin-bottom: 10px;
+}
+
+.skill {
+  position: absolute; /* Position the circles absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the circles */
+}
+
+.outer {
+  height: 350px; /* Increase the size of the circle */
+  width: 350px; /* Increase the size of the circle */
+  border-radius: 50%;
+  padding: 20px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.inner {
+  height: 310px; /* Adjust as needed */
+  width: 310px; /* Adjust as needed */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+}
+
+#number {
+  font-weight: 600;
+  color: #555;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes anim {
+  100% {
+    stroke-dashoffset: 376; /* Adjust as needed */
+  }
+}
+
+/* countdown.css */
+
+/* Add the styles for the countdown timer and buttons below */
 
 .box {
   display: flex;
@@ -44,7 +96,6 @@ body {
   background: #1255;
   border-radius: 5px;
   box-shadow: 0 2px 5px black, 0 2px 5px black;
-
 }
 
 .displey {
@@ -61,7 +112,7 @@ body {
   font-size: 3em;
   font-weight: 900;
   color: red;
- font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="number"] {
@@ -81,12 +132,11 @@ input[type="number"] {
   display: flex;
   width: inherit;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 10px; /* Adjust as needed */
 }
 
 button {
   width: 130px;
-
   padding: 7px 10px;
   font-size: 1.1em;
   font-weight: 600;
@@ -99,7 +149,6 @@ button {
 
 button:first-child {
   background: blue;
-
 }
 
 button:last-child {
