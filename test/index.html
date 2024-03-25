@@ -164,6 +164,9 @@ h2 {
     </div>
   </div>
   <script>
+// script.js
+
+// Countdown Timer Script
 let hour = document.querySelector("#hour");
 let min = document.querySelector("#min");
 let sec = document.querySelector("#sec");
@@ -171,28 +174,26 @@ let h = document.querySelector("#h");
 let m = document.querySelector("#m");
 let s = document.querySelector("#s");
 let ms = document.querySelector("#msec");
-let audio = new Audio(Timer clock.m4a')
-//--helper variables
+let audio = new Audio('Timer clock.m4a')
+
 let interval;
 let se = 0;
 let mi = 0;
 let ho = 0;
 let mls = 1;
-//-------------------
+
 let setTimerBtn = document.querySelector("#setTimerBtn");
 let startBtn = document.querySelector("#startBtn");
-//--------------------
+
 setTimerBtn.addEventListener('click', () => {
   startBtn.removeAttribute('disabled');
   startBtn.style.background = 'green';
   setTime();
-})
+});
+
 startBtn.addEventListener('click', () => {
-
   startTimer();
-})
-
-//-------------------
+});
 
 const setTime = () => {
   h.style.display = 'block';
@@ -211,9 +212,7 @@ const setTime = () => {
   h.value = 0;
   m.value = 0;
   s.value = 0;
-}
-
-//-------------------
+};
 
 const startTimer = () => {
   if (h.value[0] == 0) {
@@ -225,15 +224,9 @@ const startTimer = () => {
   if (s.value[0] == 0) {
     se = s.value.slice(1, s.value.length);
   } else { se = s.value; }
-  if ((h.value > 99 ||
-      m.value > 59 ||
-      s.value > 59) ||
-    (h.value == 0 &&
-      m.value == 0 &&
-      s.value == 0)) {
-    alert('Please Inter valid time')
+  if ((h.value > 99 || m.value > 59 || s.value > 59) || (h.value == 0 && m.value == 0 && s.value == 0)) {
+    alert('Please Inter valid time');
   } else {
-
     h.style.display = 'none';
     m.style.display = 'none';
     s.style.display = 'none';
@@ -244,48 +237,53 @@ const startTimer = () => {
     startBtn.style.background = '#999';
     start();
   }
-}
-
-//--------------------
+};
 
 const start = () => {
-
   interval = setInterval(() => {
-    mls--
+    mls--;
     if (mls == 0) {
       mls = 99;
-      se--
+      se--;
     }
     if (se < 0) {
       se = 59;
-      mi--
+      mi--;
     }
     if (mi < 0) {
       mi = 59;
-      ho--
+      ho--;
     }
     ms.innerText = mls < 10 ? '0' + mls : mls;
     sec.innerText = se < 10 ? "0" + se : se;
     min.innerText = mi < 10 ? '0' + mi : mi;
     hour.innerText = ho < 10 ? '0' + ho : ho;
     timeOver();
-  }, 10)
+  }, 10);
   ho = ho == 0 ? '0' + ho : ho;
   mi = mi == 0 ? '0' + mi : mi;
   se = se == 0 ? '0' + se : se;
-
-}
-//----------------------
+};
 
 const timeOver = () => {
   if (se == 0 && mi == 0 && ho == 0) {
     ms.innerText = '00';
     audio.play();
-
     clearInterval(interval);
   }
+};
 
-}
+// Circular Progress Bar Script
+let number = document.getElementById("number");
+let counter = 0;
+setInterval(() => {
+  if (counter == 65) {
+    clearInterval();
+  } else {
+    counter += 1;
+    number.innerHTML = counter + "%";
+  }
+}, 30);
   </script>
 </body>
 
