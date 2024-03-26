@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-* {
+  <head>
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -172,8 +171,7 @@ h2 {
   font-weight: 900;
   padding: 8%;
 }
-  </style>
-  <title>Countdown Timer</title>
+    </style>
 </head>
 
 <body>
@@ -222,9 +220,7 @@ h2 {
     </div>
   </div>
   <script>
-// script.js
-
-// Countdown Timer Script
+    // Countdown Timer Script
 let hour = document.querySelector("#hour");
 let min = document.querySelector("#min");
 let sec = document.querySelector("#sec");
@@ -232,7 +228,7 @@ let h = document.querySelector("#h");
 let m = document.querySelector("#m");
 let s = document.querySelector("#s");
 let ms = document.querySelector("#msec");
-let audio = new Audio('Timer clock.m4a')
+let audio = new Audio('Timer clock.m4a');
 
 let interval;
 let se = 0;
@@ -298,6 +294,13 @@ const startTimer = () => {
 };
 
 const start = () => {
+  // Calculate total time in seconds
+  const totalTimeInSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
+
+  // Change animation duration
+  const animationDuration = totalTimeInSeconds + 's';
+  document.querySelector('circle').style.animationDuration = animationDuration;
+
   interval = setInterval(() => {
     mls--;
     if (mls == 0) {
@@ -330,19 +333,7 @@ const timeOver = () => {
     clearInterval(interval);
   }
 };
-
-// Circular Progress Bar Script
-let number = document.getElementById("msec");
-let counter = 0;
-setInterval(() => {
-  if (counter == ) {
-    clearInterval();
-  } else {
-    counter += 1;
-    number.innerHTML = counter + "%";
-  }
-}, 30);
   </script>
-</body>
-
+      <script src="script.js"></script>
+  </body>
 </html>
