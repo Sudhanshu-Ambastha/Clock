@@ -181,7 +181,7 @@ setTimerBtn.addEventListener('click', () => {
   startBtn.removeAttribute('disabled');
   startBtn.style.background = 'green';
   setTime();
-  startTimer(); // Call startTimer function when "Set Timer" button is clicked
+  // Removed the call to startTimer() here
 });
 
 startBtn.addEventListener('click', () => {
@@ -218,7 +218,7 @@ const startTimer = () => {
     se = s.value.slice(1, s.value.length);
   } else { se = s.value; }
   if ((h.value > 99 || m.value > 59 || s.value > 59) || (h.value == 0 && m.value == 0 && s.value == 0)) {
-    alert('Please Inter valid time');
+    alert('Please Enter valid time');
   } else {
     h.style.display = 'none';
     m.style.display = 'none';
@@ -270,6 +270,7 @@ const timeOver = () => {
     clearInterval(interval);
   }
 };
+
   </script>
 </body>
  </html>
