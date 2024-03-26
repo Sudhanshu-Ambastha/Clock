@@ -160,7 +160,7 @@ let h = document.querySelector("#h");
 let m = document.querySelector("#m");
 let s = document.querySelector("#s");
 let ms = document.querySelector("#msec");
-let audio = new Audio('Timer clock.m4a')
+let audio = new Audio('Timer clock.m4a');
 
 let interval;
 let se = 0;
@@ -170,6 +170,12 @@ let mls = 1;
 
 let setTimerBtn = document.querySelector("#setTimerBtn");
 let startBtn = document.querySelector("#startBtn");
+
+// Access the <style> tag
+const styleTag = document.querySelector('style');
+
+// Find the animation rule you want to modify
+const animationRule = [...styleTag.sheet.cssRules].find(rule => rule.name === 'anim');
 
 setTimerBtn.addEventListener('click', () => {
   startBtn.removeAttribute('disabled');
@@ -245,6 +251,11 @@ const start = () => {
     min.innerText = mi < 10 ? '0' + mi : mi;
     hour.innerText = ho < 10 ? '0' + ho : ho;
     timeOver();
+    
+    // Change animation speed based on user input
+    const totalSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
+    const animationDuration = totalSeconds + 's';
+    animationRule.style.animationDuration = animationDuration;
   }, 10);
   ho = ho == 0 ? '0' + ho : ho;
   mi = mi == 0 ? '0' + mi : mi;
@@ -259,17 +270,6 @@ const timeOver = () => {
   }
 };
 
-// Circular Progress Bar Script
-let number = document.getElementById("msec");
-let counter = 0;
-setInterval(() => {
-  if (counter == ) {
-    clearInterval();
-  } else {
-    counter += 1;
-    number.innerHTML = counter + "%";
-  }
-}, 30);
   </script>
 </body>
  </html>
