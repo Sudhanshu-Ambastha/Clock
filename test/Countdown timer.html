@@ -232,6 +232,13 @@ const startTimer = () => {
 };
 
 const start = () => {
+  // Calculate total time in seconds
+  const totalTimeInSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
+
+  // Change animation duration
+  const animationDuration = totalTimeInSeconds + 's';
+  animationRule.style.animationDuration = animationDuration;
+
   interval = setInterval(() => {
     mls--;
     if (mls == 0) {
@@ -251,11 +258,6 @@ const start = () => {
     min.innerText = mi < 10 ? '0' + mi : mi;
     hour.innerText = ho < 10 ? '0' + ho : ho;
     timeOver();
-    
-    // Change animation speed based on user input
-    const totalSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
-    const animationDuration = totalSeconds + 's';
-    animationRule.style.animationDuration = animationDuration;
   }, 10);
   ho = ho == 0 ? '0' + ho : ho;
   mi = mi == 0 ? '0' + mi : mi;
@@ -269,7 +271,6 @@ const timeOver = () => {
     clearInterval(interval);
   }
 };
-
   </script>
 </body>
  </html>
