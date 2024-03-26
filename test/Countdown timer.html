@@ -171,17 +171,10 @@ let mls = 1;
 let setTimerBtn = document.querySelector("#setTimerBtn");
 let startBtn = document.querySelector("#startBtn");
 
-// Access the <style> tag
-const styleTag = document.querySelector('style');
-
-// Find the animation rule you want to modify
-const animationRule = [...styleTag.sheet.cssRules].find(rule => rule.name === 'anim');
-
 setTimerBtn.addEventListener('click', () => {
   startBtn.removeAttribute('disabled');
   startBtn.style.background = 'green';
   setTime();
-  // Removed the call to startTimer() here
 });
 
 startBtn.addEventListener('click', () => {
@@ -218,7 +211,7 @@ const startTimer = () => {
     se = s.value.slice(1, s.value.length);
   } else { se = s.value; }
   if ((h.value > 99 || m.value > 59 || s.value > 59) || (h.value == 0 && m.value == 0 && s.value == 0)) {
-    alert('Please Enter valid time');
+    alert('Please Inter valid time');
   } else {
     h.style.display = 'none';
     m.style.display = 'none';
@@ -233,6 +226,13 @@ const startTimer = () => {
 };
 
 const start = () => {
+  // Calculate total time in seconds
+  const totalTimeInSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
+
+  // Change animation duration
+  const animationDuration = totalTimeInSeconds + 's';
+  document.querySelector('circle').style.animationDuration = animationDuration;
+
   interval = setInterval(() => {
     mls--;
     if (mls == 0) {
@@ -252,11 +252,6 @@ const start = () => {
     min.innerText = mi < 10 ? '0' + mi : mi;
     hour.innerText = ho < 10 ? '0' + ho : ho;
     timeOver();
-    
-    // Change animation speed based on user input
-    const totalSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
-    const animationDuration = totalSeconds + 's';
-    animationRule.style.animationDuration = animationDuration;
   }, 10);
   ho = ho == 0 ? '0' + ho : ho;
   mi = mi == 0 ? '0' + mi : mi;
@@ -270,7 +265,6 @@ const timeOver = () => {
     clearInterval(interval);
   }
 };
-
   </script>
 </body>
  </html>
