@@ -52,7 +52,7 @@ circle{
   stroke-width: 20px;
   stroke-dasharray: 472;
   stroke-dashoffset: 472;
-  animation: anim 2s linear forwards;
+  /*animation: anim 2s linear forwards;*/
 }
 svg{
   position: absolute;
@@ -73,8 +73,11 @@ svg{
 <div class="skill">
   <div class="outer">
     <div class="inner">
+      <div class="buttons">
+          <button>start</button>
       <div id="number">
         
+        </div>
       </div>
     </div>
   </div>
@@ -86,23 +89,51 @@ svg{
                <stop offset="100%" stop-color="#673ab7" />
             </linearGradient>
          </defs>
-         <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+         <circle id="circle" cx="80" cy="80" r="70" stroke-linecap="round" />
  </svg>
 
 
 </div>
       <script>
-        let number = document.getElemId("number");
-let counter = 0;
-setInterval(() => {
-  if(counter == 65){
-    clearInterval();
-  }else{
-    counter += 1;
-    number.innerHTML = counter + "%";
-  }
+   let circle = document.getElementById("circle");
+  let numberElement = document.getElementById("number");
+  let duration = 50000; // Duration of the countdown in milliseconds
+  let initialOffset = 472; // Initial stroke-dashoffset value
+  let counter = duration / 1000; // Counter in seconds
 
-}, 30);
-      </script>
+  // Update the number and stroke-dashoffset every second
+  let interval = setInterval(() => {
+    if(counter <= 0){
+      clearInterval(interval);
+    }else{
+      counter -= 1;
+      numberElement.innerHTML = counter + "s";
+      // Calculate the new stroke-dashoffset based on the remaining time
+      let currentOffset = initialOffset * (counter / (duration / 1000));
+      circle.style.strokeDashoffset = currentOffset;
+    }
+  }, 1000);
+
+  // Function to adjust the timer
+  function adjustTimer(newDuration) {
+    // Clear the current interval
+    clearInterval(interval);
+    // Set the new duration
+    duration = newDuration;
+    // Reset the counter
+    counter = duration / 1000;
+    // Restart the interval with the new duration
+    interval = setInterval(() => {
+      if(counter <= 0){
+        clearInterval(interval);
+      }else{
+        counter -= 1;
+        numberElement.innerHTML = counter + "s";
+        let currentOffset = initialOffset * (counter / (duration / 1000));
+        circle.style.strokeDashoffset = currentOffset;
+      }
+    }, 1000);
+  }
+</script>
   </body>
 </html>
