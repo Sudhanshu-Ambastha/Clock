@@ -1,202 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <title>Timer</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Heebo:wght@100&display=swap">
-    <style>
-        @import url("https://fonts.googleapis.com/css?family=Heebo:wght@100&display=swap"); 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="countdown.css">
+  <style>
+  
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html{
-            font-family: "Heebo", Sans-Serif;
-            color:#088b8b;
-        }
-        .center{
-            display:flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .main-container{
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(45deg, #FF69B4, #008000 );
-        }
-        .circle-container{
-            width: 400px;
-            height: 400px;
-            background-color: #ddd;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            overflow: hidden;
-            z-index: 1;
-        }
-        .semicircle{
-            width: 200px;
-            height: 400px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform-origin: left;
-            transform: translateX(-50%);
-        }
-        .semicircle:nth-child(1){
-            background-color: #088b8b;
-            z-index: 2;
-            border-radius: 200px 0 0 200px;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .semicircle:nth-child(2){
-            background-color: #088b8b;
-            z-index: 3;
-            border-radius: 0 200px 200px 0;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .semicircle:nth-child(3){
-            background-color: #ddd;
-            z-index: 4;
-        }
-        .outermost-circle{
-            width: 390px;
-            height: 390px;
-            background-color: white;
-            border-radius: 50%;
-            z-index: 5;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .timer-container{
-            width: 330px;
-            height: 200px;
-            z-index: 6;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .timer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .timer div {
-            font-size: 70px;
-            font-weight: 100;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 10px 0 10px;
-        }
-        .timer .colon {
-            background-color: transparent;
-            width: 10px;
-            margin: 0;
-            margin-left: 0;
-            margin-right: 0;
-            padding-bottom: 15px;
-        }
-    </style>
+
+
+
+
+body {
+  background: #111;
+
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.countTimerBody {
+  background: url("\nathan-dumlao-5Hl5reICevY-unsplash.jpg");
+  background-size: cover;
+  width: 90%;
+  height: 100vh;
+  padding: 2%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  padding: inherit;
+  width: inherit;
+  border: 3px solid hotpink;
+  gap: 2%;
+  background: #1255;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px black, 0 2px 5px black;
+
+}
+
+.displey {
+  width: 24%;
+  padding: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 2px dimgray;
+  border-radius: inherit;
+}
+
+.displey p {
+  font-size: 3em;
+  font-weight: 900;
+  color: red;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type="number"] {
+  font-size: 3em;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  width: 90%;
+  height: inherit;
+  border: none;
+  outline: none;
+  display: none;
+  background: inherit;
+  color: #fff;
+}
+
+.btnbox {
+  display: flex;
+  width: inherit;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+button {
+  width: 130px;
+
+  padding: 7px 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-radius: 20px;
+  color: #fff;
+  border: 3px solid #fff;
+  transition: all .5s;
+  box-shadow: 0 2px 5px black;
+}
+
+button:first-child {
+  background: blue;
+
+}
+
+button:last-child {
+  background: #999;
+}
+
+h2 {
+  font-size: 2.5em;
+  color: #ff0;
+  text-transform: capitalize;
+  -webkit-text-stroke: .5px #f00;
+  font-weight: 900;
+  padding: 8%;
+}
+  </style>
+  <title>count down timer</title>
 </head>
+
 <body>
-    <div class="main-container center">
-        <div class="circle-container">
-            <div class="semicircle"></div>
-            <div class="semicircle"></div>
-            <div class="semicircle"></div>
-            <div class="outermost-circle"></div>
+  <div class="container">
+    <div class="countTimerBody">
+      <h2>Count Down Timer</h2>
+      <div class="box">
+        <div class="displey">
+          <p id="hour">00</p>
+          <input type="number" name="h" id="h" min="0" value="">
         </div>
-        <div class="timer-container">
-            <div class="timer center"></div>
+        <div class="displey">
+          <p id="min">00</p>
+          <input type="number" name="m" id="m" min="0" max="59" value="">
         </div>
-      <audio src="simple-notification-152054.mp3" id="bell-audio" volume="1.0"></audio> 
+        <div class="displey">
+          <p id="sec">00</p>
+          <input type="number" name="s" id="s" min="0" max="59" value="">
+
+        </div>
+        <div class="displey">
+          <p id="msec">00</p>
+
+        </div>
+      </div>
+      <div class="btnbox">
+        <button id="setTimerBtn">Set Timer</button>
+
+        <button id="startBtn" disabled>Start</button>
+      </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        const semicircles = document.querySelectorAll('.semicircle');
-        const timer = document.querySelector('.timer');
+  </div>
+  <script>
+  let hour = document.querySelector("#hour");
+let min = document.querySelector("#min");
+let sec = document.querySelector("#sec");
+let h = document.querySelector("#h");
+let m = document.querySelector("#m");
+let s = document.querySelector("#s");
+let ms = document.querySelector("#msec");
+let audio = new Audio('/mixkit-circus-lose-2030.wav')
+//--helper variables
+let interval;
+let se = 0;
+let mi = 0;
+let ho = 0;
+let mls = 1;
+//-------------------
+let setTimerBtn = document.querySelector("#setTimerBtn");
+let startBtn = document.querySelector("#startBtn");
+//--------------------
+setTimerBtn.addEventListener('click', () => {
+  startBtn.removeAttribute('disabled');
+  startBtn.style.background = 'green';
+  setTime();
+})
+startBtn.addEventListener('click', () => {
 
-        const hr = 0;
-        const min = 0;
-        const sec = 15;
+  startTimer();
+})
 
-        const hours = hr * 3600000;
-        const minutes = min * 60000;
-        const seconds = sec * 1000;
-        const setTime = hours + minutes + seconds;
-        const startTime = Date.now();
-        const futureTime = startTime + setTime;
+//-------------------
 
-        const timerLoop = setInterval(countDownTimer, 1000);
-        countDownTimer();
+const setTime = () => {
+  h.style.display = 'block';
+  m.style.display = 'block';
+  s.style.display = 'block';
+  hour.style.display = 'none';
+  sec.style.display = 'none';
+  min.style.display = 'none';
+  h.focus();
+  clearInterval(interval);
+  se.value = 0;
+  mi.value = 0;
+  ho.value = 0;
+  mls.value = 1;
+  ms.innerText = '00';
+  h.value = 0;
+  m.value = 0;
+  s.value = 0;
+}
 
-        function countDownTimer() {
-            const currentTime = Date.now();
-            const remainingTime = futureTime - currentTime;
-            const angle = (remainingTime / setTime) * 360;
+//-------------------
 
-            if (angle > 180) {
-                semicircles[2].style.display = 'none';
-                semicircles[0].style.transform = 'rotate(180deg)';
-                semicircles[1].style.transform = 'rotate(180deg)';
-            } else {
-                semicircles[2].style.display = 'block';
-                semicircles[0].style.transform = `rotate(180deg)`;
-                semicircles[1].style.transform = `rotate(${angle}deg)`;
-            }
+const startTimer = () => {
+  if (h.value[0] == 0) {
+    ho = h.value.slice(1, h.value.length);
+  } else { ho = h.value; }
+  if (m.value[0] == 0) {
+    mi = m.value.slice(1, m.value.length);
+  } else { mi = m.value; }
+  if (s.value[0] == 0) {
+    se = s.value.slice(1, s.value.length);
+  } else { se = s.value; }
+  if ((h.value > 99 ||
+      m.value > 59 ||
+      s.value > 59) ||
+    (h.value == 0 &&
+      m.value == 0 &&
+      s.value == 0)) {
+    alert('Please Inter valid time')
+  } else {
 
-            const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
-            const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
-            const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
+    h.style.display = 'none';
+    m.style.display = 'none';
+    s.style.display = 'none';
+    hour.style.display = 'block';
+    sec.style.display = 'block';
+    min.style.display = 'block';
+    startBtn.setAttribute('disabled', 'true');
+    startBtn.style.background = '#999';
+    start();
+  }
+}
 
-            timer.innerHTML = `
-                <div>${hrs}</div>
-                <div class="colon">:</div>
-                <div>${mins}</div>
-                <div class="colon">:</div>
-                <div>${secs}</div>
-            `;
+//--------------------
 
-            if (remainingTime <= 6000) {
-                semicircles[0].style.backgroundColor = "red";
-                semicircles[1].style.backgroundColor = "red";
-                timer.style.color = "red";
-            }
+const start = () => {
 
-            if (remainingTime < 0) {
-                clearInterval(timerLoop);
-                semicircles[0].style.display = 'none';
-                semicircles[1].style.display = 'none';
-                semicircles[2].style.display = 'none';
+  interval = setInterval(() => {
+    mls--
+    if (mls == 0) {
+      mls = 99;
+      se--
+    }
+    if (se < 0) {
+      se = 59;
+      mi--
+    }
+    if (mi < 0) {
+      mi = 59;
+      ho--
+    }
+    ms.innerText = mls < 10 ? '0' + mls : mls;
+    sec.innerText = se < 10 ? "0" + se : se;
+    min.innerText = mi < 10 ? '0' + mi : mi;
+    hour.innerText = ho < 10 ? '0' + ho : ho;
+    timeOver();
+  }, 10)
+  ho = ho == 0 ? '0' + ho : ho;
+  mi = mi == 0 ? '0' + mi : mi;
+  se = se == 0 ? '0' + se : se;
 
-                timer.innerHTML = `
-                    <div>00</div>
-                    <div class="colon">:</div>
-                    <div>00</div>
-                    <div class="colon">:</div>
-                    <div>00</div>
-                `;
-                timer.classList.remove('warning');
-            timer.style.color = "lightgray";
+}
+//----------------------
 
-            alert("Time is up!");
-            }
-        }
-    </script>
+const timeOver = () => {
+  if (se == 0 && mi == 0 && ho == 0) {
+    ms.innerText = '00';
+    audio.play();
+
+    clearInterval(interval);
+  }
+
+}
+  </script>
+  <script src="countdown.js"></script>
 </body>
+
 </html>
