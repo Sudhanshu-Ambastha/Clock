@@ -1,40 +1,93 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-* {
+  <head>
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: #111;
-
+  background: #e3edf7;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  width: 100%;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Position container relatively for absolute positioning inside */
 }
 
-.countTimerBody {
-  background: url("\nathan-dumlao-5Hl5reICevY-unsplash.jpg");
-  background-size: cover;
-  width: 90%;
-  height: 100vh;
-  padding: 2%;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
+.countdown-container {
+  position: absolute; /* Position countdown container absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center countdown container */
+  z-index: 1; /* Ensure it's above the circles */
 }
+
+.countdown {
+  margin-bottom: 10px;
+}
+
+.skill {
+  position: absolute; /* Position the circles absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the circles */
+}
+
+.outer {
+  height: 350px; /* Increase the size of the circle */
+  width: 350px; /* Increase the size of the circle */
+  border-radius: 50%;
+  padding: 20px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.inner {
+  height: 310px; /* Adjust as needed */
+  width: 310px; /* Adjust as needed */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+}
+
+
+circle{
+  fill: none;
+  stroke: url(#GradientColor);
+  stroke-width: 20px;
+  stroke-dasharray: 1032;
+  stroke-dashoffset: 0;
+  animation: anim 2s linear forwards;
+}
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes anim {
+  100% {
+    stroke-dashoffset: 1032; /* Adjust as needed */
+  }
+}
+
+/* countdown.css */
+
+/* Add the styles for the countdown timer and buttons below */
 
 .box {
   display: flex;
@@ -46,7 +99,6 @@ body {
   background: #1255;
   border-radius: 5px;
   box-shadow: 0 2px 5px black, 0 2px 5px black;
-
 }
 
 .displey {
@@ -63,7 +115,7 @@ body {
   font-size: 3em;
   font-weight: 900;
   color: red;
- font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="number"] {
@@ -83,12 +135,11 @@ input[type="number"] {
   display: flex;
   width: inherit;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 10px; /* Adjust as needed */
 }
 
 button {
   width: 130px;
-
   padding: 7px 10px;
   font-size: 1.1em;
   font-weight: 600;
@@ -101,7 +152,6 @@ button {
 
 button:first-child {
   background: blue;
-
 }
 
 button:last-child {
@@ -109,50 +159,65 @@ button:last-child {
 }
 
 h2 {
+  position: absolute;
+  top: -285px;
   font-size: 2.5em;
   color: #ff0;
   text-transform: capitalize;
   -webkit-text-stroke: .5px #f00;
   font-weight: 900;
-  margin: 0;
+  padding: 8%;
 }
-</style>
-
-  <title>count down timer</title>
+    </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="countTimerBody">
-      <h2>Count Down Timer</h2>
-      <div class="box">
-        <div class="displey">
-          <p id="hour">00</p>
-          <input type="number" name="h" id="h" min="0" value="">
-        </div>
-        <div class="displey">
-          <p id="min">00</p>
-          <input type="number" name="m" id="m" min="0" max="59" value="">
-        </div>
-        <div class="displey">
-          <p id="sec">00</p>
-          <input type="number" name="s" id="s" min="0" max="59" value="">
-
-        </div>
-        <div class="displey">
-          <p id="msec">00</p>
-
+    <h2>Countdown Timer</h2>
+    <div class="skill">
+      <div class="outer">
+        <div class="inner">
+          
         </div>
       </div>
-      <div class="btnbox">
-        <button id="setTimerBtn">Set Timer</button>
-
-        <button id="startBtn" disabled>Start</button>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="350px" height="350px">
+        <defs>
+          <linearGradient id="GradientColor">
+            <stop offset="0%" stop-color="#e91e63" />
+            <stop offset="100%" stop-color="#673ab7" />
+          </linearGradient>
+        </defs>
+        <circle cx="175" cy="175" r="165" stroke-linecap="round" />
+      </svg>
+    </div>
+    <div class="countdown-container">
+      <div class="countdown">
+        <div class="box">
+          <div class="displey">
+            <p id="hour">00</p>
+            <input type="number" name="h" id="h" min="0" value="">
+          </div>
+          <div class="displey">
+            <p id="min">00</p>
+            <input type="number" name="m" id="m" min="0" max="59" value="">
+          </div>
+          <div class="displey">
+            <p id="sec">00</p>
+            <input type="number" name="s" id="s" min="0" max="59" value="">
+          </div>
+          <div class="displey">
+            <p id="msec">00</p>
+          </div>
+        </div>
+        <div class="btnbox">
+          <button id="setTimerBtn">Set Timer</button>
+          <button id="startBtn" disabled>Start</button>
+        </div>
       </div>
     </div>
   </div>
   <script>
-// Countdown Timer Script
+    // Countdown Timer Script
 let hour = document.querySelector("#hour");
 let min = document.querySelector("#min");
 let sec = document.querySelector("#sec");
@@ -266,5 +331,6 @@ const timeOver = () => {
   }
 };
   </script>
-</body>
- </html>
+      <script src="script.js"></script>
+  </body>
+</html>
