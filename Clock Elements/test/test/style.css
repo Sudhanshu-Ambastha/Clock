@@ -59,7 +59,7 @@ body{
 .container .progress-bar{
     height: 220px;
     width: 220px;
-    background-color: conic-gradient(#664efe 360deg, #422f66 0deg); /*conic-gradient(#664efe 360deg, #422f66 0deg)*/
+    background-color: linear-gradient(#673ab7 360deg, #e91e63 0deg); /*conic-gradient(#664efe 360deg, #422f66 0deg)*/
     border-radius: 100%;
     margin: auto;
     margin-top: 30px;
