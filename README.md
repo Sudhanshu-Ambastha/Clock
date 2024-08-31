@@ -23,7 +23,7 @@ This repository contains a clock application with built-in functionalities inclu
 ![Pomodoro Clock](https://github.com/Sudhanshu-Ambastha/Clock/assets/135802131/6070994b-7c0d-4fff-bdab-bda5450bb26d)
 
 ### Countdown Timer
-![CountdownTimer](https://github.com/Sudhanshu-Ambastha/Clock/assets/135802131/c5cec562-02a8-4caa-a02d-4943c4979d72)
+![Timer](https://github.com/user-attachments/assets/532274c8-418e-4515-aa6d-a841c8815998)
 
 ## Usage
 1. Clone the repository to your local machine.
