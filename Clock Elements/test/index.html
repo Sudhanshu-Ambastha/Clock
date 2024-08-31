@@ -174,8 +174,11 @@
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="350px" height="350px">
         <defs>
           <linearGradient id="GradientColor">
-            <stop offset="0%" stop-color="#e91e63" />
-            <stop offset="100%" stop-color="#673ab7" />
+            <stop offset="0%" stop-color="#FF0000" /> //#00ffff
+            <stop offset="25%" stop-color="#FFC0CB" /> //#00008B
+            <stop offset="50%" stop-color="#800080" /> //#800080
+            <stop offset="75%" stop-color="#00008B" /> //#FFC0CB
+            <stop offset="100%" stop-color="#00ffff" /> //#FF0000
           </linearGradient>
         </defs>
         <circle cx="175" cy="175" r="165" stroke-linecap="round" />
@@ -196,9 +199,9 @@
             <p id="sec">00</p>
             <input type="number" name="s" id="s" min="0" max="59" value="">
           </div>
-          <div class="displey">
-            <p id="msec">00</p>
-          </div>
+          <!--<div class="displey">-->
+          <!--  <p id="msec">00</p>-->
+          <!--</div>-->
         </div>
         <div class="btnbox">
           <button id="setTimerBtn">Set Timer</button>
@@ -207,127 +210,127 @@
       </div>
     </div>
   </div>
-  <script>
-    // Countdown Timer Script
-    let hour = document.querySelector("#hour");
-    let min = document.querySelector("#min");
-    let sec = document.querySelector("#sec");
-    let h = document.querySelector("#h");
-    let m = document.querySelector("#m");
-    let s = document.querySelector("#s");
-    let ms = document.querySelector("#msec");
-    let audio = new Audio('Timer clock.m4a');
-    let circle = document.querySelector("circle");
+<script>
+  let hour = document.querySelector("#hour");
+  let min = document.querySelector("#min");
+  let sec = document.querySelector("#sec");
+  let h = document.querySelector("#h");
+  let m = document.querySelector("#m");
+  let s = document.querySelector("#s");
+  let audio = new Audio('Timer clock.m4a');
+  let circle = document.querySelector("circle");
 
-    let interval;
-    let se = 0;
-    let mi = 0;
-    let ho = 0;
-    let mls = 1;
-    let totalTimeInSeconds;
-    let currentTotalTimeInSeconds;
+  let interval;
+  let se = 0;
+  let mi = 0;
+  let ho = 0;
+  let totalTimeInSeconds;
+  let currentTotalTimeInSeconds;
+  let isRunning = false;
 
-    let setTimerBtn = document.querySelector("#setTimerBtn");
-    let startBtn = document.querySelector("#startBtn");
+  let setTimerBtn = document.querySelector("#setTimerBtn");
+  let startBtn = document.querySelector("#startBtn");
 
-    setTimerBtn.addEventListener('click', () => {
-      startBtn.removeAttribute('disabled');
-      startBtn.style.background = 'green';
-      setTime();
-    });
+  setTimerBtn.addEventListener('click', () => {
+    startBtn.removeAttribute('disabled');
+    startBtn.style.background = 'green'; // Set button color to green when enabled
+    setTime();
+  });
 
-    startBtn.addEventListener('click', () => {
+  startBtn.addEventListener('click', () => {
+    if (isRunning) {
+      pauseTimer();
+    } else {
       startTimer();
-    });
+    }
+  });
 
-    const setTime = () => {
-      h.style.display = 'block';
-      m.style.display = 'block';
-      s.style.display = 'block';
-      hour.style.display = 'none';
-      sec.style.display = 'none';
-      min.style.display = 'none';
-      h.focus();
-      clearInterval(interval);
-      se.value = 0;
-      mi.value = 0;
-      ho.value = 0;
-      mls.value = 1;
-      ms.innerText = '00';
-      h.value = 0;
-      m.value = 0;
-      s.value = 0;
-      circle.style.strokeDashoffset = '0';
-    };
+  const setTime = () => {
+    h.style.display = 'block';
+    m.style.display = 'block';
+    s.style.display = 'block';
+    hour.style.display = 'none';
+    sec.style.display = 'none';
+    min.style.display = 'none';
+    h.focus();
+    clearInterval(interval);
+    h.value = 0;
+    m.value = 0;
+    s.value = 0;
+    circle.style.strokeDashoffset = '0';
+    startBtn.textContent = "Start";
+    startBtn.style.background = 'green'; // Set button color to green when resetting
+    isRunning = false;
+  };
 
-    const startTimer = () => {
-      if (h.value[0] == 0) {
-        ho = h.value.slice(1, h.value.length);
-      } else { ho = h.value; }
-      if (m.value[0] == 0) {
-        mi = m.value.slice(1, m.value.length);
-      } else { mi = m.value; }
-      if (s.value[0] == 0) {
-        se = s.value.slice(1, s.value.length);
-      } else { se = s.value; }
-      if ((h.value > 99 || m.value > 59 || s.value > 59) || (h.value == 0 && m.value == 0 && s.value == 0)) {
-        alert('Please Enter valid time');
-      } else {
-        h.style.display = 'none';
-        m.style.display = 'none';
-        s.style.display = 'none';
-        hour.style.display = 'block';
-        sec.style.display = 'block';
-        min.style.display = 'block';
-        startBtn.setAttribute('disabled', 'true');
-        startBtn.style.background = '#999';
-        totalTimeInSeconds = parseInt(h.value) * 3600 + parseInt(m.value) * 60 + parseInt(s.value);
-        currentTotalTimeInSeconds = totalTimeInSeconds;
-        start();
+  const startTimer = () => {
+    if (!isRunning) {
+      ho = parseInt(h.value);
+      mi = parseInt(m.value);
+      se = parseInt(s.value);
+
+      if (ho > 99 || mi > 59 || se > 59 || (ho === 0 && mi === 0 && se === 0)) {
+        alert('Please enter a valid time');
+        return;
       }
-    };
 
-    const start = () => {
-      interval = setInterval(() => {
-        mls--;
-        if (mls == 0) {
-          mls = 99;
-          se--;
-        }
-        if (se < 0) {
-          se = 59;
-          mi--;
-        }
-        if (mi < 0) {
-          mi = 59;
-          ho--;
-        }
-        ms.innerText = mls < 10 ? '0' + mls : mls;
-        sec.innerText = se < 10 ? "0" + se : se;
-        min.innerText = mi < 10 ? '0' + mi : mi;
-        hour.innerText = ho < 10 ? '0' + ho : ho;
+      h.style.display = 'none';
+      m.style.display = 'none';
+      s.style.display = 'none';
+      hour.style.display = 'block';
+      sec.style.display = 'block';
+      min.style.display = 'block';
+      totalTimeInSeconds = ho * 3600 + mi * 60 + se;
+      currentTotalTimeInSeconds = totalTimeInSeconds;
+    }
+
+    startBtn.textContent = "Pause";
+    startBtn.style.background = 'yellow'; // Change button color to yellow when paused
+    isRunning = true;
+
+    interval = setInterval(() => {
+      if (currentTotalTimeInSeconds > 0) {
         currentTotalTimeInSeconds--;
+
+        ho = Math.floor(currentTotalTimeInSeconds / 3600);
+        mi = Math.floor((currentTotalTimeInSeconds % 3600) / 60);
+        se = currentTotalTimeInSeconds % 60;
+
+        hour.innerText = ho < 10 ? '0' + ho : ho;
+        min.innerText = mi < 10 ? '0' + mi : mi;
+        sec.innerText = se < 10 ? '0' + se : se;
+
         updateProgressBar();
+      } else {
         timeOver();
-      }, 10);
-      ho = ho == 0 ? '0' + ho : ho;
-      mi = mi == 0 ? '0' + mi : mi;
-      se = se == 0 ? '0' + se : se;
-    };
-
-    const updateProgressBar = () => {
-      const progress = (currentTotalTimeInSeconds / totalTimeInSeconds) * 1032;
-      circle.style.strokeDashoffset = 1032 - progress;
-    };
-
-    const timeOver = () => {
-      if (se == 0 && mi == 0 && ho == 0) {
-        ms.innerText = '00';
-        audio.play();
-        clearInterval(interval);
       }
-    };
-  </script>
-</body>
+    }, 1000);
+  };
 
+  const pauseTimer = () => {
+    clearInterval(interval);
+    startBtn.textContent = "Start";
+    startBtn.style.background = 'green'; // Change button color to green when resumed
+    isRunning = false;
+  };
+
+  const updateProgressBar = () => {
+    const progress = (currentTotalTimeInSeconds / totalTimeInSeconds) * 1032;
+    circle.style.strokeDashoffset = 1032 - progress;
+  };
+
+  const timeOver = () => {
+    clearInterval(interval);
+    hour.innerText = '00';
+    min.innerText = '00';
+    sec.innerText = '00';
+    circle.style.strokeDashoffset = 1032;
+    audio.play();
+    startBtn.textContent = "Start";
+    startBtn.style.background = '#999';
+    startBtn.setAttribute('disabled', 'true');
+    isRunning = false;
+  };
+</script>
+</body>
 </html>
