@@ -32,3 +32,5 @@ This repository contains a clock application with built-in functionalities inclu
 4. Set alarms, start timers, and utilize other features as needed.
 
 Feel free to contribute to this project by submitting pull requests or opening issues for any bugs or feature requests.
+
+Also, check out the deployed [clock model](https://clock-mu-self.vercel.app/).
