@@ -20,10 +20,10 @@ This repository contains a clock application with built-in functionalities inclu
 ![Stopwatch](https://github.com/Sudhanshu-Ambastha/Clock/assets/135802131/2ed0ce2c-f07e-488b-8cf6-1f5446df030f)
 
 ### Pomodoro Clock
-![Pomodoro Clock](https://github.com/Sudhanshu-Ambastha/Clock/assets/135802131/6070994b-7c0d-4fff-bdab-bda5450bb26d)
+![Pomodoro](https://github.com/Sudhanshu-Ambastha/Clock/assets/135802131/6070994b-7c0d-4fff-bdab-bda5450bb26d)
 
 ### Countdown Timer
-![Timer](https://github.com/user-attachments/assets/532274c8-418e-4515-aa6d-a841c8815998)
+![Timer](https://github.com/user-attachments/assets/7a6e0f9c-d1cc-49fe-8cb0-084970713080)
 
 ## Usage
 1. Clone the repository to your local machine.
