@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Stopwatch</title> 
     <style> 
         body { 
@@ -85,7 +85,10 @@
         } 
         @media only screen and (max-width: 768px) {
             #time {
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 5px;
             }
 
             #time .digit:nth-child(5), 
