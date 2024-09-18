@@ -116,10 +116,41 @@
         }
 
         @media only screen and (max-width: 768px) {
-            *{
+            body {
                 padding: 10px;
+                font-size: 0.9em; /* Adjust font size for smaller screens */
+            }
+
+            #clock-container {
+                width: 200px; /* Reduce size of clock for mobile */
+                height: 310px;
+            }
+
+            #clock-counter {
+                font-size: 3em; /* Reduce font size for the timer digits */
+            }
+
+            .controls-block {
+                display: block;
+                margin-bottom: 10px; /* Stack controls vertically */
+            }
+
+            .control-value {
+                font-size: 1.5em; /* Adjust control value font size */
+            }
+
+            button {
+                font-size: 1em; /* Adjust button font size */
+                padding: 5px;
+            }
+
+            #clock-label {
+                font-size: 1.5em; /* Adjust label size */
+                margin-top: 0;
             }
         }
+        
+
     </style>
 </head>
 <body>
