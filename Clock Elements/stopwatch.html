@@ -33,6 +33,14 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: 0 10px;
         }
 
         .digit { 
@@ -75,20 +83,62 @@
         #reset { 
             background-color: #c91400; 
         } 
+        @media only screen and (max-width: 768px) {
+            #time {
+                flex-wrap: wrap;
+            }
+
+            #time .digit:nth-child(5), 
+            #time .txt:nth-child(6), 
+            #time .digit:nth-child(7), 
+            #time .txt:nth-child(8) {
+                flex-basis: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                width: 80px;
+                padding: 8px 10px;
+                margin: 10px 10px;
+                font-size: 16px;
+            }
+
+            .time-unit {
+                margin-bottom: 10px;
+            }
+
+            .digit {
+                font-size: 50px;
+            }
+
+            .txt {
+                font-size: 18px;
+            }
+        }
+
     </style> 
 </head> 
 <body> 
     <div class="container"> 
         <h1>Stopwatch</h1> 
-        <div id="time"> 
-            <span class="digit" id="hr">00</span> 
-            <span class="txt">Hr</span> 
-            <span class="digit" id="min">00</span> 
-            <span class="txt">Min</span> 
-            <span class="digit" id="sec">00</span> 
-            <span class="txt">Sec</span> 
-            <span class="digit" id="count">00</span> 
-        </div> 
+        <div id="time">
+            <div class="time-unit">
+                <span class="digit" id="hr">00</span>
+                <span class="txt">Hr</span>
+            </div>
+            <div class="time-unit">
+                <span class="digit" id="min">00</span>
+                <span class="txt">Min</span>
+            </div>
+            <div class="time-unit">
+                <span class="digit" id="sec">00</span>
+                <span class="txt">Sec</span>
+            </div>
+            <div class="time-unit">
+                <span class="digit" id="count">00</span>
+                <span class="txt">MinSec</span>
+            </div>
+        </div>
         <div id="buttons"> 
             <button class="btn" id="start">Start</button> 
             <button class="btn" id="stop">Stop</button> 

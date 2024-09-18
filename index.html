@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" href="./Clock.jpg" type="image/jpg">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
@@ -65,6 +65,37 @@
             height: calc(100% - 40px); /* Adjust for padding */
             border: none;
         }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .tab {
+                position: fixed;
+                bottom: 0; /* Align the tab buttons to the bottom */
+                height: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                background-color: #f1f1f1;
+                margin-left: -15px;
+            }
+
+            .tab button {
+                flex: 1; /* Spread buttons evenly across the width */
+            }
+
+            .tabcontent {
+                margin-bottom: 50px; /* Adjust margin to create space for tabs at the bottom */
+                height: calc(100vh - 50px); /* Adjust content height above the tabs */
+            }
+
+            iframe {
+                height: calc(100% - 40px);
+            }
+        }
+            
     </style>
 </head>
 <body>
