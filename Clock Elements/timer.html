@@ -233,14 +233,14 @@
     </div>
   </div>
 <script>
-  let hour = document.querySelector("#hour");
-  let min = document.querySelector("#min");
-  let sec = document.querySelector("#sec");
-  let h = document.querySelector("#h");
-  let m = document.querySelector("#m");
-  let s = document.querySelector("#s");
-  let audio = new Audio('Timer clock.m4a');
-  let circle = document.querySelector("circle");
+  const hour = document.querySelector("#hour");
+  const min = document.querySelector("#min");
+  const sec = document.querySelector("#sec");
+  const h = document.querySelector("#h");
+  const m = document.querySelector("#m");
+  const s = document.querySelector("#s");
+  const audio = new Audio('Timer clock.m4a');
+  const circle = document.querySelector("circle");
 
   let interval;
   let se = 0;
@@ -251,12 +251,12 @@
   let isRunning = false;
   let isPaused = false;
 
-  let setTimerBtn = document.querySelector("#setTimerBtn");
-  let startBtn = document.querySelector("#startBtn");
+  const setTimerBtn = document.querySelector("#setTimerBtn");
+  const startBtn = document.querySelector("#startBtn");
 
   setTimerBtn.addEventListener('click', () => {
     startBtn.removeAttribute('disabled');
-    startBtn.style.background = 'green'; // Set button color to green when enabled
+    startBtn.style.background = 'green'; 
     setTime();
   });
 
@@ -286,7 +286,7 @@
     s.value = 0;
     circle.style.strokeDashoffset = '0';
     startBtn.textContent = "Start";
-    startBtn.style.background = 'green'; // Set button color to green when resetting
+    startBtn.style.background = 'green'; 
     isRunning = false;
     isPaused = false;
   };
@@ -308,7 +308,7 @@
     sec.style.display = 'block';
     min.style.display = 'block';
     startBtn.textContent = "Pause";
-    startBtn.style.background = '#FFDF00'; // Change button color to yellow when paused
+    startBtn.style.background = '#FFDF00'; 
 
     totalTimeInSeconds = ho * 3600 + mi * 60 + se;
     currentTotalTimeInSeconds = totalTimeInSeconds;
@@ -341,14 +341,14 @@
   const pauseTimer = () => {
     clearInterval(interval);
     startBtn.textContent = "Start";
-    startBtn.style.background = 'green'; // Change button color to green when resumed
+    startBtn.style.background = 'green'; 
     isRunning = false;
     isPaused = true;
   };
 
   const resumeTimer = () => {
     startBtn.textContent = "Pause";
-    startBtn.style.background = '#FFDF00'; // Change button color to yellow when paused
+    startBtn.style.background = '#FFDF00'; 
     isRunning = true;
     isPaused = false;
 
