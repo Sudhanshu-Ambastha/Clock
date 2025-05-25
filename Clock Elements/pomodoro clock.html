@@ -193,15 +193,15 @@
     $(document).ready(function () {
 
         // Set default timer lengths (in seconds)
-        var breakTime = 300;
-        var sessionTime = 1500;
+        let breakTime = 300;
+        let sessionTime = 1500;
 
         // Set the countdown timer for the first Session
         var clockTime = sessionTime;
         var clockType = 'session';
 
         // Tell the app that the clock isn't running
-        var clockRunning = false;
+        let clockRunning = false;
 
         // Set an ID to use with setInterval and clearInterval
         var countdownID;
